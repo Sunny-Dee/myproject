@@ -58,7 +58,7 @@ public class Model2 extends Observable{
 		for (int i=0; i<=rows; i++) {
 			for (int j=0; j<=columns; j++) {
 					
-				intersections[i][j] = new Intersection(new Light());
+				intersections[i][j] = new Intersection(new Light(2));
 				if ((i == rows) || (j == columns))
 					intersections[i][j] = new NullIntersection();
 				builder.addLight(intersections[i][j], i, j);
@@ -72,7 +72,7 @@ public class Model2 extends Observable{
 		for (int i=0; i<rows; i++) {
 			LongHorizontalRoad temproad = new LongHorizontalRoad(rows, columns, intersections, eastToWest);
 			for (int j=0; j<=columns; j++) {
-				Road l = new Road(i, j);
+				Road l = new Road(i, j, true);
 				
 				l.setIntersection(intersections[l.i][l.j]);
 				
@@ -92,9 +92,9 @@ public class Model2 extends Observable{
 		for (int j=0; j<columns; j++) {
 			LongVerticalRoad temproad2 = new LongVerticalRoad(rows, columns, intersections, southToNorth);
 			for (int i=0; i<=rows; i++) {
-				Road l = new Road(j, i);
+				Road l = new Road(j, i, false);
 				
-				l.setIntersection(intersections[l.i][l.j]);
+				l.setIntersection(intersections[l.j][l.i]);
 				
 				builder.addVerticalRoad(l, i, j, southToNorth);
 				roads.add(l);

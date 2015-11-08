@@ -12,7 +12,7 @@ public class MyMain {
 		Intersection[][] intersections = new Intersection[rows+1][columns+1];
 		for (int i=0; i<=rows; i++) {
 			for (int j=0; j<=columns; j++) 
-				intersections[i][j] = new Intersection(new Light());
+				intersections[i][j] = new Intersection(new Light(1));
 		}
 		
 		LongHorizontalRoad bigRoad = new LongHorizontalRoad(rows, columns, intersections, false);

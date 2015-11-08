@@ -10,13 +10,20 @@ public class Intersection implements Agent{
 	public Intersection(Light light){
 		this.light = light;
 		intersectionLength = 10; // Hard coding this for now, change it later
-
+	}
+	
+	public java.awt.Color getColor() {
+		return light.getColor();
 	}
 	
 	public boolean canGo(){
 		//light.setTempBoolean();
 		return light.canGo();
 			
+	}
+	
+	public int getState(){
+		return light.getState2();
 	}
 	
 	public boolean isNull(){

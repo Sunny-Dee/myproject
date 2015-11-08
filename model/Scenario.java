@@ -53,7 +53,7 @@ public class Scenario extends Observable {
 		// Add Lights
 		for (int i=0; i<rows; i++) {
 			for (int j=0; j<columns; j++) {
-				intersections[i][j] = new Intersection(new Light());
+				intersections[i][j] = new Intersection(new Light(1));
 				builder.addLight(intersections[i][j], i, j);
 				agents.add(intersections[i][j]);
 			}
@@ -63,7 +63,7 @@ public class Scenario extends Observable {
 		boolean eastToWest = false;
 		for (int i=0; i<rows; i++) {
 			for (int j=0; j<=columns; j++) {
-				Road l = new Road(i, j);
+				Road l = new Road(i, j, true);
 				builder.addHorizontalRoad(l, i, j, eastToWest);
 				roads.add(l);
 			}
@@ -74,7 +74,7 @@ public class Scenario extends Observable {
 		boolean southToNorth = false;
 		for (int j=0; j<columns; j++) {
 			for (int i=0; i<=rows; i++) {
-				Road l = new Road(i, j);
+				Road l = new Road(i, j, false);
 				builder.addVerticalRoad(l, i, j, southToNorth);
 				roads.add(l);
 			}

@@ -13,19 +13,22 @@ public class Road {
 	public int i;
 	public int j; 
 	public Agent intersection;
+	public boolean horizontal;
 	
-	public Road(int i, int j) { 
+	public Road(int i, int j, boolean horizontal) { 
 		roadLength = 200;
 		this.i = i;
 		this.j = j;
 		roadID = ++roadTracker;
+		this.horizontal = horizontal;
 	} // Created only by this package. Deliana changed it to public. Change this later
 	
-	public Road(double roadLength, int i, int j) { 
+	public Road(double roadLength, int i, int j, boolean horizontal) { 
 		this.roadLength = roadLength;
 		this.i = i;
 		this.j = j;
 		roadID = ++roadTracker;
+		this.horizontal = horizontal;
 	}
 	
 	public double getRoadLength(){
@@ -56,6 +59,19 @@ public class Road {
 	}
 	
 	public boolean canGo(){
-		return intersection.canGo();
+		int s = ((Intersection) intersection).getState();
+		if (!horizontal){
+			if (s <= 1)
+				return true;
+			else
+				return false;
+		}
+		else{
+			if (s <= 1)
+				return false;
+			else 
+				return true;
+		}
+
 	}
 }

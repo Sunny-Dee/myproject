@@ -25,7 +25,7 @@ public class LongHorizontalRoad implements LongRoad {
 	public void createLongRoad(){
 		for (int i = 0; i<rows; i++){
 			for (int j = 0; j<=columns; j++)
-				addRoad(new Road(i , j)); //change road length to user input		
+				addRoad(new Road(i , j, true)); //change road length to user input		
 		}
 		for (Road r : roads){
 			r.setIntersection(intersections[r.i][r.j]);

@@ -57,12 +57,12 @@ public class SimpleModel extends Observable {
 	}
 
 	private void setup(AnimatorBuilder builder) {
-		Road r1 = new Road(0,0);
+		Road r1 = new Road(0,0, true);
 		builder.addHorizontalRoad(r1, 0, 1, false);
 		Car c = new Car(r1);
 		r1.accept(c);
 		agents.add(c);
-		Road r2 = new Road(1,1);
+		Road r2 = new Road(1,1, true);
 		builder.addHorizontalRoad(r2, 1, 1, false);
 
 		// Road oldroad = null;

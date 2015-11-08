@@ -1,5 +1,7 @@
 package myproject.model;
 
+import java.awt.Color;
+
 /**
  * A light has a boolean state.
  */
@@ -9,29 +11,41 @@ public class Light implements Agent {
 	 private double yellowDurationNS; // Duration of the North/South yellow phase (in seconds)
 	 private double greenDurationEW;  // Duration of the East/West green phase (in seconds)
 	 private double yellowDurationEW; // Duration of the East/West yellow phase (in seconds)
-	 private boolean state;
-	 private State lightState;
+	 private boolean tempstate;
+	 private java.awt.Color color;
+	 private int state; 
+	 private double duration;
 	
-	public Light() { 
-		state = false;
-		lightState = new GreenNSRedEW();
-		greenDurationNS  = 55.0;
-		yellowDurationNS = 5.0;
-		greenDurationEW  = 25.0;
-		yellowDurationEW = 5.0;
+	public Light(int state) { 
+		tempstate = false;
+		this.state = state%3;
+		
+		greenDurationNS  = 50.0;
+		yellowDurationNS = 30.0;
+		greenDurationEW  = 50.0;
+		yellowDurationEW = 30.0;
+		
+		setColor();
 	} // Created only by this package. Default values. I changed it to public
 
-	Light(double greenDurationNS, double yellowDurationNS, 
+	Light(int state, double greenDurationNS, double yellowDurationNS, 
 			double greenDurationEW, double yellowDurationEW) { 
-		state = false;
-		lightState = new GreenNSRedEW();
+		tempstate = false;
+		this.state = state%3;
+		
 		this.greenDurationNS  = greenDurationNS;
 		this.yellowDurationNS = yellowDurationNS;
 		this.greenDurationEW  = greenDurationEW;
 		this.yellowDurationEW = yellowDurationEW;
+		
+		setColor();
 	} // Created only by this package
 
 	public boolean getState() {
+		return tempstate;
+	}
+	
+	public int getState2(){
 		return state;
 	}
 	
@@ -39,47 +53,49 @@ public class Light implements Agent {
 		return false;
 	};
 	
-	public void setLightState(State newState){
-		lightState = newState;
-	}
+
 	
 	//THE FOLLOWING TWO METHODS ARE JUST SO I CAN KEEP PLAYING WITH THIS!!!!!
 	//MUST FIX LATER
 	public void setTempBoolean(){
-		state = !state; 
+		tempstate = !tempstate; 
+	}
+	
+	public java.awt.Color getColor() {
+		return color;
+	}
+	
+	private void setColor(){
+		if (state == 0){
+			color = Color.GREEN;
+			duration = greenDurationNS;
+		}
+		else if (state == 1){
+			color = Color.YELLOW;
+			duration = yellowDurationNS;
+		}
+		else{
+			color = Color.RED;
+			duration = greenDurationEW + yellowDurationEW;
+		}
 	}
 	
 	public boolean canGo(){
-		return state; 
+		return tempstate; 
 	}
 	
 	public void run(double time) {
 		if (time%70==0) {
-			state = !state;
+			tempstate = !tempstate;
 		}
 		
-		if (time%greenDurationNS==0){
-			setLightState(new YellowNSRedEW());
-			lightState.getState();
+		duration = duration - 1;
+		System.out.println("duration " + duration);
+		if (duration == 0){
+			state = (state+1) % 3;
+			setColor();
 		}
 		
-		if (time% (greenDurationNS + yellowDurationNS) == 0){
-			setLightState(new RedNSGreenEW());
-			lightState.getState();
-			
-		}
-		
-		if (time% (greenDurationNS + yellowDurationNS 
-				 + greenDurationEW) == 0){
-			setLightState(new RedNSYellowEW());
-			lightState.getState();
-		}
-		
-		if (time% (greenDurationNS + yellowDurationNS 
-				 + greenDurationEW + yellowDurationEW) == 0){
-			setLightState(new GreenNSRedEW());
-			lightState.getState();
-		}
 	}
 
 	//Temporarily hard coding this but will change it later. 

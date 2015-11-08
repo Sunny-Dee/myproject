@@ -8,6 +8,7 @@ import java.util.List;
 import myproject.model.Agent;
 import myproject.model.AnimatorBuilder;
 import myproject.model.Car;
+import myproject.model.Intersection;
 import myproject.model.MP;
 import myproject.model.Road;
 import myproject.util.Animator;
@@ -90,11 +91,12 @@ public class SwingAnimatorBuilder implements AnimatorBuilder {
 				if (e.x.isNull())
 					g.setColor(Color.BLUE);
 				else{
-					if (e.x.canGo()) {
-						g.setColor(Color.GREEN);
-					} else {
-						g.setColor(Color.RED);
-					}
+//					if (e.x.canGo()) {
+//						g.setColor(Color.GREEN);
+//					} else {
+//						g.setColor(Color.RED);
+//					}
+					g.setColor( ((Intersection) e.x).getColor() ); 
 				}
 				XGraphics.fillOval(g, e.t, 0, 0, e.x.getDimension(), VP.elementWidth);
 				
