@@ -54,7 +54,7 @@ public class Light implements Agent {
 	}
 	
 	public void run(double time) {
-		if (time%60==0) {
+		if (time%70==0) {
 			state = !state;
 		}
 		

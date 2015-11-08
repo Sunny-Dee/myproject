@@ -8,14 +8,14 @@ public class LongHorizontalRoad implements LongRoad {
 	public int rows;
 	public int columns;
 	Agent[][] intersections;
-	public boolean northSouth;
+	public boolean eastWest;
 
 	
 	public LongHorizontalRoad(int rows, int columns, Agent[][] intersections, boolean orientationEW){
 		this.rows = rows;
 		this.columns = columns;
 		this.intersections = intersections; 
-		northSouth = orientationEW;
+		eastWest = orientationEW;
 	};
 	
 	public void addRoad(Road r){
@@ -33,9 +33,18 @@ public class LongHorizontalRoad implements LongRoad {
 		roads.get(columns).setIntersection(new NullIntersection());
 	}
 	
-	public Road nextRoad(){
-		return roads.iterator().next();
-
+//	public Road nextRoad(){
+//		return roads.iterator().next();
+//
+//	}
+	
+	public boolean isDirectionNSWE(){
+		return eastWest;
+	}
+	
+	public Road nextRoad(int index){
+		return roads.get(index);
+	
 	}
 	
 	public boolean carCanGo(Road r){

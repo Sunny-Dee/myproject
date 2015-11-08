@@ -8,13 +8,13 @@ public class LongVerticalRoad implements LongRoad {
 	public int rows;
 	public int columns;
 	Agent[][] intersections;
-	public boolean northSout;
+	public boolean northSouth;
 	
 	public LongVerticalRoad(int rows, int columns, Agent[][] intersections, boolean orientationNS){
 		this.rows = rows;
 		this.columns = columns;
 		this.intersections = intersections; 
-		northSout = orientationNS;
+		northSouth = orientationNS;
 	};
 	
 	public void addRoad(Road r){
@@ -32,8 +32,17 @@ public class LongVerticalRoad implements LongRoad {
 		roads.get(columns).setIntersection(new NullIntersection());
 	}
 	
-	public Road nextRoad(){
-		return roads.iterator().next();
+//	public Road nextRoad(){
+//		return roads.iterator().next();
+//
+//	}
+	
+	public boolean isDirectionNSWE(){
+		return northSouth;
+	}
+	
+	public Road nextRoad(int index){
+		return roads.get(index);
 
 	}
 	

@@ -17,22 +17,22 @@ public class MyMain2 {
 //			m.run(10);
 //			m.dispose();
 //		}
-		{
-			Model2 m = new Model2(new TextAnimatorBuilder(), 1, 1);
-			m.run(10);
-			m.dispose();
-		}
 //		{
-//			Model2 m = new Model2(new SwingAnimatorBuilder(), 1, 1);
+//			Model2 m = new Model2(new TextAnimatorBuilder(), 1, 1);
 //			m.run(10);
 //			m.dispose();
 //		}
 		{
-			Model2 m = new Model2(new SwingAnimatorBuilder(), 2, 3);
-			m.run(500);
-			m.run(500);
+			Model2 m = new Model2(new SwingAnimatorBuilder(), 2, 2);
+			m.run(1000);
 			m.dispose();
 		}
+//		{
+//			Model2 m = new Model2(new SwingAnimatorBuilder(), 2, 3);
+//			m.run(500);
+//			m.run(500);
+//			m.dispose();
+//		}
 		System.exit(0);
 	}
 }

@@ -1,5 +1,6 @@
 package myproject.model;
 
+
 /**
  * A car remembers its position from the beginning of its road.
  * Cars have random velocity and random movement pattern:
@@ -34,7 +35,7 @@ public class Car implements Agent {
 		this.brakeDistance = brakeDistance;
 		this.longRoad = longRoad;
 		index = 0;
-		currentRoad = longRoad.nextRoad();
+		currentRoad = longRoad.nextRoad(index++);
 		currentRoad.accept(this);
 		
 		
@@ -47,11 +48,13 @@ public class Car implements Agent {
 		maxVelocity = 6.0;
 		brakeDistance = 10.0;
 		stopDistance = 1.0;
-		index = 0;
+		index = longRoad.isDirectionNSWE() ? longRoad.getRoadSize()-1 : 0 ;
 		this.longRoad = longRoad;
-		currentRoad = longRoad.nextRoad();
+		currentRoad = longRoad.isDirectionNSWE() ? longRoad.nextRoad(longRoad.getRoadSize()-1):
+												longRoad.nextRoad(index++);
 		currentRoad.accept(this);
- 
+		
+		
 	}
 	
 	//only necessary so bootstrap code compiles
@@ -80,8 +83,11 @@ public class Car implements Agent {
 		return currentRoad;
 	}
 	
-	public void setRoad(Road road){
-		currentRoad = road;
+	public void nextRoad(){
+		if (longRoad.isDirectionNSWE())
+			currentRoad = longRoad.nextRoad(index++);
+		else
+			currentRoad = longRoad.nextRoad(index--);
 		currentRoad.accept(this);
 		segmentPosition = 0;
 	}
@@ -146,7 +152,7 @@ public class Car implements Agent {
 		if (longRoad.carCanGo(currentRoad)){
 			System.out.println("This light is green. Car can go");
 			//currentRoad = longRoad.nextRoad(index++);
-			setRoad(longRoad.nextRoad());
+			nextRoad();
 		}
 		else if (currentRoad.intersection instanceof NullIntersection){
 			sunk = true;
@@ -185,7 +191,7 @@ public class Car implements Agent {
 			}
 			if (longRoad.carCanGo(currentRoad)){
 				position += currentRoad.intersection.getDimension() + carLength;
-				setRoad(longRoad.nextRoad());
+				nextRoad();
 				
 			}
 			else{

@@ -8,11 +8,13 @@ public interface LongRoad {
 
 	public void createLongRoad();
 	
-	public Road nextRoad();
+	public Road nextRoad(int index);
 	
 	public boolean carCanGo(Road r);
 	
 	public String roadIndex(Road r);
 	
 	public int getRoadSize();
+	
+	public boolean isDirectionNSWE();
 }
