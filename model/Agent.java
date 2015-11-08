@@ -8,5 +8,6 @@ public interface Agent {
 	public boolean isNull();
 	public boolean canGo();
 	public double getDimension();
+	public int getState(); 
 }
 

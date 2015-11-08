@@ -59,8 +59,8 @@ public class Model2 extends Observable{
 			for (int j=0; j<=columns; j++) {
 					
 				intersections[i][j] = new Intersection(new Light(2));
-				if ((i == rows) || (j == columns))
-					intersections[i][j] = new NullIntersection();
+//				if ((i == rows) || (j == columns))
+//					intersections[i][j] = new NullIntersection();
 				builder.addLight(intersections[i][j], i, j);
 				agents.add(intersections[i][j]);
 			}

@@ -23,7 +23,7 @@ public class Intersection implements Agent{
 	}
 	
 	public int getState(){
-		return light.getState2();
+		return light.getState();
 	}
 	
 	public boolean isNull(){

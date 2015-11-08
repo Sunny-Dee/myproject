@@ -41,11 +41,11 @@ public class Light implements Agent {
 		setColor();
 	} // Created only by this package
 
-	public boolean getState() {
-		return tempstate;
-	}
+//	public boolean getState() {
+//		return tempstate;
+//	}
 	
-	public int getState2(){
+	public int getState(){
 		return state;
 	}
 	

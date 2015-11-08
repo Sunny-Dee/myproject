@@ -14,9 +14,13 @@ public class NullIntersection implements Agent{
 		
 	}
 
-	@Override
+	
 	public double getDimension() {
 		return 10;
+	}
+
+	public int getState() {
+		return -1;
 	}
 
 }

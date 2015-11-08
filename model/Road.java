@@ -59,7 +59,8 @@ public class Road {
 	}
 	
 	public boolean canGo(){
-		int s = ((Intersection) intersection).getState();
+		int s = intersection.getState();
+		if (s == -1) return false;
 		if (!horizontal){
 			if (s <= 1)
 				return true;

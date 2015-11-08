@@ -189,7 +189,7 @@ public class Car implements Agent {
 				currentRoad.sinkCar(this);
 				position +=0;
 			}
-			if (longRoad.carCanGo(currentRoad) && ((index < longRoad.getRoadSize()) || (index != 0))){
+			else if (longRoad.carCanGo(currentRoad) && ((index < longRoad.getRoadSize()) || (index != 0))){
 				position += currentRoad.intersection.getDimension() + carLength;
 				nextRoad();
 				
@@ -211,5 +211,11 @@ public class Car implements Agent {
 	//car should always be able to go. Consider car not being an Agent. 
 	public boolean canGo() {
 		return true;
+	}
+
+	@Override
+	public int getState() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
