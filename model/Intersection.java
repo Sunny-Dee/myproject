@@ -16,12 +16,6 @@ public class Intersection implements Agent{
 		return light.getColor();
 	}
 	
-	public boolean canGo(){
-		//light.setTempBoolean();
-		return light.canGo();
-			
-	}
-	
 	public int getState(){
 		return light.getState();
 	}
@@ -36,12 +30,7 @@ public class Intersection implements Agent{
 	
 	public void run(double time){
 		light.run(time);
-		
-//		if (time%40==0) {
-//			
-//			light.setTempBoolean();
-//			
-//		}
+
 	}
 	
 }

@@ -14,7 +14,7 @@ public interface LongRoad {
 	
 	public String roadIndex(Road r);
 	
-	public int getRoadSize();
+	public int getRoadNum();
 	
 	public boolean isDirectionNSWE();
 }

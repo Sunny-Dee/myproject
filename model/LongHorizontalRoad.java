@@ -55,7 +55,7 @@ public class LongHorizontalRoad implements LongRoad {
 		return "(" + r.i + "," + r.j + ")";
 	}
 
-	public int getRoadSize() {
+	public int getRoadNum() {
 		return roads.size();
 	}
 

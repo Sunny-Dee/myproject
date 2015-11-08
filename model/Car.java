@@ -15,7 +15,7 @@ public class Car implements Agent {
 	private java.awt.Color color = new java.awt.Color((int)Math.ceil(Math.random()*255),(int)Math.ceil(Math.random()*255),(int)Math.ceil(Math.random()*255));
 	private double maxVelocity = 6.0;    // The maximum velocity of the car (in meters/second)
 	private double distanceToObstacle;
-	private double velocity = (int) Math.ceil(Math.random() * maxVelocity);
+//	private double velocity = (int) Math.ceil(Math.random() * maxVelocity);
 	private double brakeDistance;  // If distance to nearest obstacle is <= brakeDistance,
 	                //   then the car will start to slow down (in meters)
 	private double stopDistance;   // If distance to nearest obstacle is == stopDistance,
@@ -26,6 +26,7 @@ public class Car implements Agent {
 	private LongRoad longRoad;
 	private int index; 
 	private boolean sunk = false;
+	private double distanceToNextCar = 10000000; //something really high before more cars come along
 
 
 	public Car(double carLength, double maxVelocity, double brakeDistance, LongRoad longRoad) { 
@@ -48,9 +49,9 @@ public class Car implements Agent {
 		maxVelocity = 6.0;
 		brakeDistance = 10.0;
 		stopDistance = 1.0;
-		index = longRoad.isDirectionNSWE() ? longRoad.getRoadSize()-1 : 0 ;
+		index = longRoad.isDirectionNSWE() ? longRoad.getRoadNum()-1 : 0 ;
 		this.longRoad = longRoad;
-		currentRoad = longRoad.isDirectionNSWE() ? longRoad.nextRoad(longRoad.getRoadSize()-1):
+		currentRoad = longRoad.isDirectionNSWE() ? longRoad.nextRoad(longRoad.getRoadNum()-1):
 												longRoad.nextRoad(index++);
 		currentRoad.accept(this);
 		
@@ -61,7 +62,7 @@ public class Car implements Agent {
 	public Car(Road road) { 
 		carLength = 10;
 		maxVelocity = 6.0;
-		brakeDistance = 10.0;
+		brakeDistance = 5.0;
 		stopDistance = 1.0;
 		currentRoad = road;
 		currentRoad.accept(this);
@@ -84,10 +85,10 @@ public class Car implements Agent {
 	}
 	
 	public void nextRoad(){
-//		if (longRoad.isDirectionNSWE())
-//			currentRoad = longRoad.nextRoad(index++);
-//		else
-//			currentRoad = longRoad.nextRoad(index--);
+		if (longRoad.isDirectionNSWE())
+			currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()));
+		else
+			currentRoad = longRoad.nextRoad(Math.max(index--, 0));
 //		currentRoad.accept(this);
 		segmentPosition = 0;
 	}
@@ -104,49 +105,37 @@ public class Car implements Agent {
 		return sunk;
 	}
 	
-	
-	private void update(){
-		setDistanceToObstacle(currentRoad.getRoadLength());
-		if (distanceToObstacle < 0){
-			velocity = 0;
-			//System.out.println("Car sunk.");
-		}
-		if ((distanceToObstacle + velocity) > brakeDistance)
-			velocity = maxVelocity;
+	private double update(){
+		distanceToObstacle = (Math.min(currentRoad.getRoadLength() - segmentPosition - carLength,
+				distanceToNextCar));
 		
-		else if (distanceToObstacle == stopDistance){
-			velocity = 0;
-			//System.out.println("Car stopped");
-		}
+		double velocity = (maxVelocity / (brakeDistance - stopDistance))
+	            * (distanceToObstacle - stopDistance);
 		
-		else // (distanceToObstacle <= brakeDistance)
-			velocity = 1;
-			
-			
-//			(maxVelocity / (brakeDistance - stopDistance))
-//	              * (distanceToObstacle - position);
-//		velocity = Math.max(0.0, velocity);
-//		velocity = Math.min(maxVelocity, velocity);
+		velocity = Math.max(0.0, velocity);
+		velocity = Math.min(maxVelocity, velocity);
+		
+		return velocity;
 	}
 	
-	public void drive(){
-		//position = 0;
-		velocity = maxVelocity;
-		System.out.println("Car starts at position " + position +
-				 " on road " + currentRoad.getRoadID());
-		while (velocity!=0){
-//			 setDistanceToObstacle(currentRoad.getRoadLength());
-			 update();
-			 position += velocity;
-			 System.out.println("Car is at position " + position +
-					 " on road " + longRoad.roadIndex(currentRoad));
-
-		}
-		if ((position + carLength + stopDistance) == currentRoad.getRoadLength()){
-			System.out.println("Car is at intersection.");
-			drivePastIntersection();
-		}
-	}
+//	public void drive(){
+//		//position = 0;
+//		velocity = maxVelocity;
+//		System.out.println("Car starts at position " + position +
+//				 " on road " + currentRoad.getRoadID());
+//		while (velocity!=0){
+////			 setDistanceToObstacle(currentRoad.getRoadLength());
+//			 update();
+//			 position += velocity;
+//			 System.out.println("Car is at position " + position +
+//					 " on road " + longRoad.roadIndex(currentRoad));
+//
+//		}
+//		if ((position + carLength + stopDistance) == currentRoad.getRoadLength()){
+//			System.out.println("Car is at intersection.");
+//			drivePastIntersection();
+//		}
+//	}
 	
 	public void drivePastIntersection(){
 		if (longRoad.carCanGo(currentRoad)){
@@ -160,28 +149,13 @@ public class Car implements Agent {
 		} else
 			System.out.println("Car needs to wait for light to change");
 	}
-	
-	
-//	public double updateVelocity(double time, double distanceToObstacle){
-//		double newVelocity = (maxVelocity / (brakeDistance - stopDistance))
-//              * (distanceToObstacle - position);
-//		newVelocity = Math.max(0.0, newVelocity);
-//		newVelocity = Math.min(maxVelocity, newVelocity);
-////		nextFrontPosition = frontPosition + velocity * timeStep;
-//		//once I figure out how the observer pattern I will uncomment and apply this
-//		return newVelocity;
-//	}
 
+	
 	private boolean isAtIntersection(){
-//		double len = currentRoad.getRoadLength(); //* index;
-//		double intersectionLen = currentRoad.intersection.getDimension() * index-1;
-//		if ((len + intersectionLen) == (position + carLength) ){
-//			return true;
-//		}
-//		return false;
-//		return currentRoad.getRoadLength() <= (carLength + segmentPosition + stopDistance + brakeDistance);
 		return currentRoad.getRoadLength() == (carLength + segmentPosition);
 	}
+	
+	
 	public void run(double time) {
 		
 		if (isAtIntersection()){
@@ -189,7 +163,7 @@ public class Car implements Agent {
 				currentRoad.sinkCar(this);
 				position +=0;
 			}
-			else if (longRoad.carCanGo(currentRoad) && ((index < longRoad.getRoadSize()) || (index != 0))){
+			else if (longRoad.carCanGo(currentRoad)){ // && ((index < longRoad.getRoadNum()) || (index != 0))){
 				position += currentRoad.intersection.getDimension() + carLength;
 				nextRoad();
 				
@@ -200,20 +174,12 @@ public class Car implements Agent {
 			}
 		}
 		else{
-			segmentPosition +=1;
-			position += 1;
-			System.out.println("Position " + position + "Segment position " + segmentPosition);
+			double v = update();
+			segmentPosition +=v;
+			position += v;
 		}
-
-
 	}
-
-	//car should always be able to go. Consider car not being an Agent. 
-	public boolean canGo() {
-		return true;
-	}
-
-	@Override
+	
 	public int getState() {
 		// TODO Auto-generated method stub
 		return 0;

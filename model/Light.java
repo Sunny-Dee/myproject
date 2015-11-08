@@ -80,17 +80,13 @@ public class Light implements Agent {
 		}
 	}
 	
-	public boolean canGo(){
-		return tempstate; 
-	}
 	
 	public void run(double time) {
-		if (time%70==0) {
-			tempstate = !tempstate;
-		}
+//		if (time%70==0) {
+//			tempstate = !tempstate;
+//		}
 		
 		duration = duration - 1;
-		System.out.println("duration " + duration);
 		if (duration == 0){
 			state = (state+1) % 3;
 			setColor();

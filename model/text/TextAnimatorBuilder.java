@@ -68,11 +68,12 @@ public class TextAnimatorBuilder implements AnimatorBuilder {
 		public void update(Observable o, Object arg) {
 			for (Element<Agent> e : lightElements) {
 				System.out.print("Light at (" + e.i + "," + e.j + "): ");
-				if (e.x.canGo()) {
-					System.out.println("Red");
-				} else {
+				if (e.x.getState() == 0) {
 					System.out.println("Green");
-				}
+				} else if (e.x.getState() == 1) {
+					System.out.println("Yellow");
+				} else
+					System.out.println("Green");
 			}
 			for (Element<Road> e : roadElements) {
 				for (Car d : e.x.getCars()) {
