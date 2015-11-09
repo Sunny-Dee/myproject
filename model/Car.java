@@ -86,7 +86,7 @@ public class Car implements Agent {
 	
 	public void nextRoad(){
 		if (longRoad.isDirectionNSWE())
-			currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()));
+			currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()-1));
 		else
 			currentRoad = longRoad.nextRoad(Math.max(index--, 0));
 //		currentRoad.accept(this);
@@ -118,41 +118,23 @@ public class Car implements Agent {
 		return velocity;
 	}
 	
-//	public void drive(){
-//		//position = 0;
-//		velocity = maxVelocity;
-//		System.out.println("Car starts at position " + position +
-//				 " on road " + currentRoad.getRoadID());
-//		while (velocity!=0){
-////			 setDistanceToObstacle(currentRoad.getRoadLength());
-//			 update();
-//			 position += velocity;
-//			 System.out.println("Car is at position " + position +
-//					 " on road " + longRoad.roadIndex(currentRoad));
-//
-//		}
-//		if ((position + carLength + stopDistance) == currentRoad.getRoadLength()){
-//			System.out.println("Car is at intersection.");
-//			drivePastIntersection();
-//		}
-//	}
 	
-	public void drivePastIntersection(){
-		if (longRoad.carCanGo(currentRoad)){
-			System.out.println("This light is green. Car can go");
-			//currentRoad = longRoad.nextRoad(index++);
-			nextRoad();
-		}
-		else if (currentRoad.intersection instanceof NullIntersection){
-			sunk = true;
-			System.out.print("This is a null intersection, so car sunk");
-		} else
-			System.out.println("Car needs to wait for light to change");
-	}
+//	public void drivePastIntersection(){
+//		if (longRoad.carCanGo(currentRoad)){
+//			System.out.println("This light is green. Car can go");
+//			//currentRoad = longRoad.nextRoad(index++);
+//			nextRoad();
+//		}
+//		else if (currentRoad.intersection instanceof NullIntersection){
+//			sunk = true;
+//			System.out.print("This is a null intersection, so car sunk");
+//		} else
+//			System.out.println("Car needs to wait for light to change");
+//	}
 
 	
 	private boolean isAtIntersection(){
-		return currentRoad.getRoadLength() == (carLength + segmentPosition);
+		return currentRoad.getRoadLength() <= (carLength + segmentPosition);
 	}
 	
 	
