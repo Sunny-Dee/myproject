@@ -13,7 +13,7 @@ public class Car implements Agent {
 	private double position;
 	private double segmentPosition;
 	private java.awt.Color color = new java.awt.Color((int)Math.ceil(Math.random()*255),(int)Math.ceil(Math.random()*255),(int)Math.ceil(Math.random()*255));
-	private double maxVelocity = 6.0;    // The maximum velocity of the car (in meters/second)
+	private double maxVelocity = 3.0;    // The maximum velocity of the car (in meters/second)
 	private double distanceToObstacle;
 //	private double velocity = (int) Math.ceil(Math.random() * maxVelocity);
 	private double brakeDistance;  // If distance to nearest obstacle is <= brakeDistance,
@@ -119,20 +119,6 @@ public class Car implements Agent {
 	}
 	
 	
-//	public void drivePastIntersection(){
-//		if (longRoad.carCanGo(currentRoad)){
-//			System.out.println("This light is green. Car can go");
-//			//currentRoad = longRoad.nextRoad(index++);
-//			nextRoad();
-//		}
-//		else if (currentRoad.intersection instanceof NullIntersection){
-//			sunk = true;
-//			System.out.print("This is a null intersection, so car sunk");
-//		} else
-//			System.out.println("Car needs to wait for light to change");
-//	}
-
-	
 	private boolean isAtIntersection(){
 		return currentRoad.getRoadLength() <= (carLength + segmentPosition);
 	}
@@ -157,8 +143,8 @@ public class Car implements Agent {
 		}
 		else{
 			double v = update();
-			segmentPosition +=v;
-			position += v;
+			segmentPosition +=2;
+			position += 2;
 		}
 	}
 	
