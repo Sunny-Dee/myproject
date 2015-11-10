@@ -2,6 +2,7 @@ package myproject.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class LongHorizontalRoad implements LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
@@ -22,21 +23,17 @@ public class LongHorizontalRoad implements LongRoad {
 		roads.add(r);
 	}
 	
-	public void createLongRoad(){
-		for (int i = 0; i<rows; i++){
-			for (int j = 0; j<=columns; j++)
-				addRoad(new Road(i , j, true)); //change road length to user input		
-		}
-		for (Road r : roads){
-			r.setIntersection(intersections[r.i][r.j]);
-		}
-		roads.get(columns).setIntersection(new NullIntersection());
-	}
-	
-//	public Road nextRoad(){
-//		return roads.iterator().next();
-//
+//	public void createLongRoad(){
+//		for (int i = 0; i<rows; i++){
+//			for (int j = 0; j<=columns; j++)
+//				addRoad(new Road(i , j, true)); //change road length to user input		
+//		}
+//		for (Road r : roads){
+//			r.setIntersection(intersections[r.i][r.j]);
+//		}
+//		roads.get(columns).setIntersection(new NullIntersection());
 //	}
+	
 	
 	public boolean isDirectionNSWE(){
 		return eastWest;
@@ -46,6 +43,10 @@ public class LongHorizontalRoad implements LongRoad {
 		return roads.get(index);
 	
 	}
+	
+//	public Road nextRoad(){
+//		return roads.iterator().next();
+//	}
 	
 	public boolean carCanGo(Road r){
 		return r.canGo();
@@ -57,6 +58,15 @@ public class LongHorizontalRoad implements LongRoad {
 
 	public int getRoadNum() {
 		return roads.size();
+	}
+	
+	public void reverseRoads(){
+		ListIterator<Road> ri = roads.listIterator();
+		List<Road> tempList = new ArrayList<Road>();
+		while (ri.hasPrevious()){
+			tempList.add(ri.previous());
+		}
+		roads = tempList;
 	}
 
 }

@@ -46,6 +46,9 @@ public class Model2 extends Observable{
 		animator.dispose();
 		disposed = true;
 	}
+	protected void removeAgent(Agent a) {
+		agents.remove(a);
+	}
 
 	/**
 	 * Construct the model, establishing correspondences with the visualizer.
@@ -81,7 +84,7 @@ public class Model2 extends Observable{
 				temproad.addRoad(l);
 
 			}
-			Car car = new Car(temproad);
+			Car car = new Car(temproad, this);
 			agents.add(car);
 			
 			eastToWest = !eastToWest;
@@ -102,7 +105,7 @@ public class Model2 extends Observable{
 
 	
 			}
-			Car car = new Car(temproad2);
+			Car car = new Car(temproad2, this);
 			agents.add(car);
 			
 			southToNorth = !southToNorth;

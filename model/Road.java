@@ -58,6 +58,15 @@ public class Road {
 		intersection = newIntersection;
 	}
 	
+	
+	//NOT SURE WHAT TO DO IN SPECIAL CASES WHERE INDEX+1 IS OUT OF BOUND. 
+	public double distanceToObstacle(Car car){
+		int index = cars.indexOf(car);
+		
+		return Math.min(car.getPosition() - roadLength, 
+				car.getPosition() - cars.get(index + 1).getPosition()); 
+	}
+	
 	public boolean canGo(){
 		int s = intersection.getState();
 		if (s == -1) return false;

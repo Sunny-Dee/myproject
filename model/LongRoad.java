@@ -6,7 +6,7 @@ public interface LongRoad {
 
 	public void addRoad(Road r);
 
-	public void createLongRoad();
+//	public void createLongRoad();
 	
 	public Road nextRoad(int index);
 	

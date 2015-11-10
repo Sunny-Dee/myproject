@@ -27,44 +27,34 @@ public class Car implements Agent {
 	private int index; 
 	private boolean sunk = false;
 	private double distanceToNextCar = 10000000; //something really high before more cars come along
+	private Model2 model;
 
-
-	public Car(double carLength, double maxVelocity, double brakeDistance, LongRoad longRoad) { 
-		this.carLength = carLength;
-		
-		this.maxVelocity = maxVelocity;
-		this.brakeDistance = brakeDistance;
-		this.longRoad = longRoad;
-		index = 0;
-		currentRoad = longRoad.nextRoad(index++);
-		currentRoad.accept(this);
-		
-		
-
-	} // Created only by this package
+//	public Car(double carLength, double maxVelocity, double brakeDistance, LongRoad longRoad, Model2 model) { 
+//		this.carLength = carLength;
+//		
+//		this.maxVelocity = maxVelocity;
+//		this.brakeDistance = brakeDistance;
+//		this.longRoad = longRoad;
+//		this.model = model;
+//		index = 0;
+//		currentRoad = longRoad.nextRoad(index++);
+//		currentRoad.accept(this);
+//		
+//		
+//
+//	} // Created only by this package
 	
 	//just to keep the party going here are default values
-	public Car(LongRoad longRoad) { 
+	public Car(LongRoad longRoad, Model2 model) { 
 		carLength = 10;
 		maxVelocity = 6.0;
 		brakeDistance = 10.0;
 		stopDistance = 1.0;
+		this.model = model;
 		index = longRoad.isDirectionNSWE() ? longRoad.getRoadNum()-1 : 0 ;
 		this.longRoad = longRoad;
 		currentRoad = longRoad.isDirectionNSWE() ? longRoad.nextRoad(longRoad.getRoadNum()-1):
 												longRoad.nextRoad(index++);
-		currentRoad.accept(this);
-		
-		
-	}
-	
-	//only necessary so bootstrap code compiles
-	public Car(Road road) { 
-		carLength = 10;
-		maxVelocity = 6.0;
-		brakeDistance = 5.0;
-		stopDistance = 1.0;
-		currentRoad = road;
 		currentRoad.accept(this);
 	}
 	
@@ -85,11 +75,18 @@ public class Car implements Agent {
 	}
 	
 	public void nextRoad(){
+//		currentRoad.sinkCar (this);
 		if (longRoad.isDirectionNSWE())
 			currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()-1));
 		else
 			currentRoad = longRoad.nextRoad(Math.max(index--, 0));
-//		currentRoad.accept(this);
+		
+//		if (currentRoad == null) {
+//			model.removeAgent(this);
+//		} else {
+//			currentRoad.accept(this);
+//			
+//		}
 		segmentPosition = 0;
 	}
 	
@@ -149,7 +146,7 @@ public class Car implements Agent {
 	}
 	
 	public int getState() {
-		// TODO Auto-generated method stub
+		//Auto-generated method stub
 		return 0;
 	}
 }

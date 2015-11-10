@@ -1,7 +1,7 @@
 package myproject.main;
 
-import myproject.model.SimpleModel;
-import myproject.model.swing.SwingAnimatorBuilder;
+//import myproject.model.SimpleModel;
+//import myproject.model.swing.SwingAnimatorBuilder;
 
 /**
  * A static class to demonstrate the visualization aspect of
@@ -10,9 +10,9 @@ import myproject.model.swing.SwingAnimatorBuilder;
 public class SimpleMain {
 	private SimpleMain() {}
 	public static void main(String[] args) {
-		SimpleModel m = new SimpleModel(new SwingAnimatorBuilder());
-		m.run(500);
-		m.dispose();
+//		SimpleModel m = new SimpleModel(new SwingAnimatorBuilder());
+//		m.run(500);
+//		m.dispose();
 		System.exit(0);
 	}
 }

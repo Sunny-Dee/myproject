@@ -24,7 +24,7 @@ public class TrafficBuilder {
 //			Car length (meters) [min = 10.0, max  = 15.0]
 	private double carLength = 10;
 //			Car maximum velocity (meters/second) [min = 1.0, max = 3.0]  
-	private double maxVelocity = 1;
+	private double maxVelocity = 1.0;
 //			Car stop distance (meters) [min = 0.5, max = 5.0]
 	private double stopDistance = 1.0;
 	private double breakDistance = 9.0; //[min = 9.0, max = 10.0]
@@ -35,13 +35,17 @@ public class TrafficBuilder {
 	
 	
 	public void setTimeStep(double newtime){ timeStep = newtime;}
+	public double timeStep() { return timeStep;}
 	
-	public void settime(double newtime){ time = newtime;}	
+	public void settime(double newtime){ time = newtime;}
+	public double time() { return time;}
 	
 	public void setGrid(int newRows, int newColumns){
 		rows = newRows;
 		columns = newColumns;
 	}
+	public int rows() { return rows;}
+	public int columns() { return columns;}
 	
 	public boolean setPattern(int patternChoice){ //consider design for this one
 		if (patternChoice < 1 || patternChoice > 2)
@@ -50,13 +54,14 @@ public class TrafficBuilder {
 		pattern = patternChoice;
 		return true; //if setPattern == false, ask again. 
 	}
-	
+
 	public String patternToString(){
 		if (pattern == 1)
 			return "[simple]";
 		else
 			return "[alternating]";
 	}
+	public int pattern() { return pattern;}
 	
 	public boolean setEntryRate(double newEntryRate){
 		if (newEntryRate < 1.0 || newEntryRate > 2.5)
@@ -64,6 +69,7 @@ public class TrafficBuilder {
 		entryRate = newEntryRate;
 		return true;
 	}
+	public double entryRate() { return entryRate;}
 	
 	public boolean setRoadSegmentLength(double newLength){
 		if (newLength < 10.0 || newLength > 15.0)
@@ -71,6 +77,7 @@ public class TrafficBuilder {
 		roadSegmentLength = newLength;
 		return true;
 	}
+	public double roadSegmentLen() { return roadSegmentLength*100;}
 	
 	public boolean setIntersectionLength(double newLength){
 		if (newLength < 10.0 || newLength > 15.0)
@@ -78,6 +85,7 @@ public class TrafficBuilder {
 		intersectionLength = newLength;
 		return true;
 	}
+	public double intersectionLen() { return intersectionLength;}
 	
 	public boolean setCarLength(double newCarLength){
 		if (newCarLength < 10.0 || newCarLength > 15.0)
@@ -85,6 +93,7 @@ public class TrafficBuilder {
 		carLength = newCarLength;
 		return true;
 	}
+	public double carLen() { return carLength;}
 	
 	public boolean setMaxVelocity(double newMax){
 		if (newMax < 10.0 || newMax > 15.0)
@@ -92,6 +101,7 @@ public class TrafficBuilder {
 		maxVelocity = newMax;
 		return true;
 	}
+	public double maxVel() { return maxVelocity;}
 	
 	public boolean setStopDistance(double newStopDist){
 		if (newStopDist < 0.5 || newStopDist > 5.0)
@@ -99,6 +109,7 @@ public class TrafficBuilder {
 		stopDistance = newStopDist;
 		return true;
 	}
+	public double stopDist() { return stopDistance;}
 	
 	public boolean setBreakDistance(double newBreakDist){
 		if (newBreakDist < 9.0 || newBreakDist > 10.0)
@@ -106,6 +117,8 @@ public class TrafficBuilder {
 		breakDistance = newBreakDist;
 		return true;
 	}
+	public double breakDist() { return breakDistance;}
+	
 	
 	public boolean setGreenLight(double greenTime){
 		if (greenTime < 30.0 || greenTime > 180.0)
@@ -113,6 +126,7 @@ public class TrafficBuilder {
 		greenLightTime = greenTime;
 		return true;
 	}
+	public double greenLightTime() { return greenLightTime;}
 	
 	public boolean setYellowLight(double yellowTime){
 		if (yellowTime < 32.0 || yellowTime > 40.0)
@@ -120,7 +134,7 @@ public class TrafficBuilder {
 		yellowLightTime = yellowTime;
 		return true;
 	}
-	
+	public double yellowLightTime() { return yellowLightTime;}
 	
 	public String toString(){
 		StringBuilder str = new StringBuilder("");
