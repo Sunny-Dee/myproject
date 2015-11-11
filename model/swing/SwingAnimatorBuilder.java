@@ -54,6 +54,10 @@ public class SwingAnimatorBuilder implements AnimatorBuilder {
 				: new TranslatorNS(x, y, l.getRoadLength(), VP.elementWidth, VP.scaleFactor);
 		painter.addRoad(l,t);
 	}
+	
+	public void clear(){
+		painter = new MyPainter();
+	}
 
 
 	/** Class for drawing the Model. */

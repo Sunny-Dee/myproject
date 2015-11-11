@@ -9,16 +9,16 @@ public class MyMain2 {
 	public static void main(String[] args) {
 		{
 			Model2 m = new Model2(new TextAnimatorBuilder(), 0, 1);
-			m.run(10);
+			m.run(100);
 			m.dispose();
 		}
 //		{
-//			Model2 m = new Model2(new SwingAnimatorBuilder(), 0, 1);
+//			Model2 m = new Model2(new SwingAnimatorBuilder(), new TrafficBuilder(), 0, 1);
 //			m.run(10);
 //			m.dispose();
 //		}
 //		{
-//			Model2 m = new Model2(new TextAnimatorBuilder(), 1, 1);
+//			Model2 m = new Model2(new TextAnimatorBuilder(), new TrafficBuilder(), 1, 1);
 //			m.run(10);
 //			m.dispose();
 //		}
@@ -28,7 +28,6 @@ public class MyMain2 {
 			m.dispose();
 		}
 //		{
-//			Model2 m = new Model2(new SwingAnimatorBuilder(), 2, 3);
 //			m.run(500);
 //			m.run(500);
 //			m.dispose();

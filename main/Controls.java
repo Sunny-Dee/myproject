@@ -1,7 +1,7 @@
 package myproject.main;
 
 
-import myproject.model.Model2;
+import myproject.model.AnimatorBuilder;
 import myproject.model.TrafficBuilder;
 import myproject.ui.UI;
 import myproject.ui.UIError;
@@ -15,6 +15,7 @@ public class Controls {
 	private static final int EXITED = 0;
 	private static final int EXIT = 1;
 	private static final int START = 2;
+	private static final int PARAMS = 3;
 	private static final int NUMSTATES = 16;
 	private UIMenu[] menus;
 	private int state;
@@ -23,17 +24,21 @@ public class Controls {
 	private UIFormTest doubleTest;
 	private UIFormTest stringTest;
 
-	private Model2 model;
+
 	private UI ui;
-	private TrafficBuilder trafficBuilder = new TrafficBuilder();
+	private TrafficBuilder trafficBuilder;
+	private AnimatorBuilder builder;
+
 	
-	Controls(Model2 model, UI ui) {
-		this.model = model;
+	Controls(AnimatorBuilder builder, UI ui) {
 		this.ui = ui;
+		this.builder = builder;
+		trafficBuilder = new TrafficBuilder(builder);
 
 		menus = new UIMenu[NUMSTATES];
 		state = START;
 		addSTART(START);
+		addSimParams(PARAMS);
 		addEXIT(EXIT);
 
 		numberTest = input -> { 
@@ -76,142 +81,10 @@ public class Controls {
 		
 		m.add("Run simulation",
 				() -> {
-						model.run(1000);
+					trafficBuilder.runModel();
 				});
 		m.add("Change simulation parameters",
-				() -> {
-					UIMenuBuilder subMenu = new UIMenuBuilder();
-					subMenu.add("Show current values", 
-							() -> {
-								trafficBuilder.toString();
-							}); 
-					subMenu.add("Simulation time step", 
-							() -> {
-								UIFormBuilder f = new UIFormBuilder();
-								f.add("Current Simulation time step \nEnter new simulation time step", numberTest);
-								String[] result1 = ui.processForm(f.toUIForm("Simulation time step"));
-								trafficBuilder.setTimeStep(Integer.parseInt(result1[0]));		
-							});
-					subMenu.add("Simulation runtime", 
-							() -> {
-								UIFormBuilder f = new UIFormBuilder();
-								f.add("Enter new simulation runtime", numberTest);
-								String[] result = ui.processForm(f.toUIForm("Simulation runtime"));
-								trafficBuilder.settime(Integer.parseInt(result[0]));	
-							});
-					subMenu.add("Grid size", 
-							() -> {
-								UIFormBuilder f = new UIFormBuilder();
-								f.add("Enter number of rows, default is 2", numberTest);
-								f.add("Enter number of columns, default is 3", numberTest);
-								String[] result = ui.processForm(f.toUIForm("Grid"));
-								trafficBuilder.setGrid(Integer.parseInt(result[0]), Integer.parseInt(result[1]));
-							
-							});
-					subMenu.add("Set traffic pattern", 
-							() -> {
-								boolean x;
-								do {
-									UIFormBuilder f = new UIFormBuilder();
-									f.add("Enter 1 for simple pattern, 2 for alternating", numberTest);
-									String[] result = ui.processForm(f.toUIForm("Pattern"));
-									x = trafficBuilder.setPattern(Integer.parseInt(result[0]));
-								} while (!x);
-							});
-					subMenu.add("Set car entry rate", 
-							() -> {
-								boolean x;
-								do {
-									UIFormBuilder f = new UIFormBuilder();
-									f.add("Car entry rate (seconds/car) [min = 1.0, max = 2.5]", doubleTest);
-									String[] result = ui.processForm(f.toUIForm("Entry rate"));
-									x = trafficBuilder.setEntryRate(Double.parseDouble(result[0]));
-								} while (!x);
-							});
-					subMenu.add("Set road lengths", 
-							() -> {
-								boolean x;
-								do {
-									UIFormBuilder f = new UIFormBuilder();
-									f.add("Road segment length (meters) [min = 10.0, max = 15.0]", doubleTest);
-									String[] result = ui.processForm(f.toUIForm("Road length"));
-									x = trafficBuilder.setRoadSegmentLength(Double.parseDouble(result[0]));
-								} while (!x);
-							});
-					subMenu.add("Set intersection lengths", 
-							() -> {
-								UIFormBuilder f = new UIFormBuilder();
-								f.add("Intersection length (meters) [min = 10.0, max  = 15.0]", doubleTest);
-								String[] result = ui.processForm(f.toUIForm("Intersection length"));
-								trafficBuilder.setIntersectionLength(Double.parseDouble(result[0]));
-							});
-					subMenu.add("Set car length", 
-							() -> {
-								boolean x;
-								do {
-									UIFormBuilder f = new UIFormBuilder();
-									f.add("Car length (meters) [min = 10.0, max  = 15.0]", doubleTest);
-									String[] result = ui.processForm(f.toUIForm("Car length"));
-									x = trafficBuilder.setCarLength(Double.parseDouble(result[0]));
-								} while (!x);
-							});
-					subMenu.add("Set max car velocity", 
-							() -> {
-								boolean x;
-								do {
-									UIFormBuilder f = new UIFormBuilder();
-									f.add("Car maximum velocity (meters/second) [min = 1.0, max = 3.0]  ", doubleTest);
-									String[] result = ui.processForm(f.toUIForm("Car velocity"));
-									x = trafficBuilder.setMaxVelocity(Double.parseDouble(result[0]));
-								} while (!x);
-							});
-					subMenu.add("Set car stop distance", 
-							() -> {
-								boolean x;
-								do {
-									UIFormBuilder f = new UIFormBuilder();
-									f.add("Car stop distance (meters) [min = 0.5, max = 5.0]", doubleTest);
-									String[] result = ui.processForm(f.toUIForm("Stop distance"));
-									x = trafficBuilder.setStopDistance(Double.parseDouble(result[0]));
-								} while (!x);
-							});
-					subMenu.add("Set car break distance", 
-							() -> {
-								boolean x;
-								do {
-									UIFormBuilder f = new UIFormBuilder();
-									f.add("Car break distance (meters) [min = 9.0, max = 10.0]", doubleTest);
-									String[] result = ui.processForm(f.toUIForm("Stop distance"));
-									x = trafficBuilder.setBreakDistance(Double.parseDouble(result[0]));
-								} while (!x);
-							});
-					subMenu.add("Set traffic light green times", 
-							() -> {
-								boolean x;
-								do {
-									UIFormBuilder f = new UIFormBuilder();
-									f.add("Traffic light green time (seconds) [min = 30.0, max = 180.0]", doubleTest);
-									String[] result = ui.processForm(f.toUIForm("Stop distance"));
-									x = trafficBuilder.setGreenLight(Double.parseDouble(result[0]));
-								} while (!x);
-							});
-					subMenu.add("Set traffic light yellow times", 
-							() -> {
-								boolean x;
-								do {
-									UIFormBuilder f = new UIFormBuilder();
-									f.add("Traffic light yellow time (seconds) [min = 32.0, max = 40.0]", doubleTest);
-									String[] result = ui.processForm(f.toUIForm("Stop distance"));
-									x = trafficBuilder.setGreenLight(Double.parseDouble(result[0]));
-								} while (!x);
-							});
-					subMenu.add("Reset simulation and return to main menu", 
-							() -> {trafficBuilder = new TrafficBuilder(); }); 
-					subMenu.add("Return to main menu", 
-							() -> { state = START; }); 
-					menus[NUMSTATES] = subMenu.toUIMenu("Change Parameters");
-
-				});
+				() -> state = PARAMS);
 		m.add("Exit",
 				() -> state = EXIT);
 		menus[stateNum] = m.toUIMenu("Traffic Simulator");
@@ -228,6 +101,147 @@ public class Controls {
 				() -> state = START);
 
 		menus[stateNum] = m.toUIMenu("Are you sure you want to exit?");
+	}
+	
+	private void addSimParams(int stateNum){
+		UIMenuBuilder s = new UIMenuBuilder();
+		
+		s.add("Default", () -> {});
+		
+		s.add("Show current values", 
+				() -> {   
+					ui.displayMessage(trafficBuilder.toString());
+				}); 
+		s.add("Simulation time step", 
+				() -> {
+					UIFormBuilder f = new UIFormBuilder();
+					f.add("Current Simulation time step \nEnter new simulation time step", numberTest);
+					String[] result1 = ui.processForm(f.toUIForm("Simulation time step"));
+					trafficBuilder.setTimeStep(Integer.parseInt(result1[0]));		
+				});
+		s.add("Simulation runtime", 
+				() -> {
+					UIFormBuilder f = new UIFormBuilder();
+					f.add("Enter new simulation runtime", numberTest);
+					String[] result = ui.processForm(f.toUIForm("Simulation runtime"));
+					trafficBuilder.settime(Integer.parseInt(result[0]));	
+				});
+		s.add("Grid size", 
+				() -> {
+					UIFormBuilder f = new UIFormBuilder();
+					f.add("Enter number of rows, default is 2", numberTest);
+					f.add("Enter number of columns, default is 3", numberTest);
+					String[] result = ui.processForm(f.toUIForm("Grid"));
+					trafficBuilder.setGrid(Integer.parseInt(result[0]), Integer.parseInt(result[1]));
+				
+				});
+		s.add("Set traffic pattern", 
+				() -> {
+					boolean x;
+					do {
+						UIFormBuilder f = new UIFormBuilder();
+						f.add("Enter 1 for simple pattern, 2 for alternating", numberTest);
+						String[] result = ui.processForm(f.toUIForm("Pattern"));
+						x = trafficBuilder.setPattern(Integer.parseInt(result[0]));
+					} while (!x);
+				});
+		s.add("Set car entry rate", 
+				() -> {
+					boolean x;
+					do {
+						UIFormBuilder f = new UIFormBuilder();
+						f.add("Car entry rate (seconds/car) [min = 1.0, max = 2.5]", doubleTest);
+						String[] result = ui.processForm(f.toUIForm("Entry rate"));
+						x = trafficBuilder.setEntryRate(Double.parseDouble(result[0]));
+					} while (!x);
+				});
+		s.add("Set road lengths", 
+				() -> {
+					boolean x;
+					do {
+						UIFormBuilder f = new UIFormBuilder();
+						f.add("Road segment length (meters) [min = 10.0, max = 15.0]", doubleTest);
+						String[] result = ui.processForm(f.toUIForm("Road length"));
+						x = trafficBuilder.setRoadSegmentLength(Double.parseDouble(result[0]));
+					} while (!x);
+				});
+		s.add("Set intersection lengths", 
+				() -> {
+					UIFormBuilder f = new UIFormBuilder();
+					f.add("Intersection length (meters) [min = 10.0, max  = 15.0]", doubleTest);
+					String[] result = ui.processForm(f.toUIForm("Intersection length"));
+					trafficBuilder.setIntersectionLength(Double.parseDouble(result[0]));
+				});
+		s.add("Set car length", 
+				() -> {
+					boolean x;
+					do {
+						UIFormBuilder f = new UIFormBuilder();
+						f.add("Car length (meters) [min = 10.0, max  = 15.0]", doubleTest);
+						String[] result = ui.processForm(f.toUIForm("Car length"));
+						x = trafficBuilder.setCarLength(Double.parseDouble(result[0]));
+					} while (!x);
+				});
+		s.add("Set max car velocity", 
+				() -> {
+					boolean x;
+					do {
+						UIFormBuilder f = new UIFormBuilder();
+						f.add("Car maximum velocity (meters/second) [min = 1.0, max = 3.0]  ", doubleTest);
+						String[] result = ui.processForm(f.toUIForm("Car velocity"));
+						x = trafficBuilder.setMaxVelocity(Double.parseDouble(result[0]));
+					} while (!x);
+				});
+		s.add("Set car stop distance", 
+				() -> {
+					boolean x;
+					do {
+						UIFormBuilder f = new UIFormBuilder();
+						f.add("Car stop distance (meters) [min = 0.5, max = 5.0]", doubleTest);
+						String[] result = ui.processForm(f.toUIForm("Stop distance"));
+						x = trafficBuilder.setStopDistance(Double.parseDouble(result[0]));
+					} while (!x);
+				});
+		s.add("Set car break distance", 
+				() -> {
+					boolean x;
+					do {
+						UIFormBuilder f = new UIFormBuilder();
+						f.add("Car break distance (meters) [min = 9.0, max = 10.0]", doubleTest);
+						String[] result = ui.processForm(f.toUIForm("Stop distance"));
+						x = trafficBuilder.setBreakDistance(Double.parseDouble(result[0]));
+					} while (!x);
+				});
+		s.add("Set traffic light green times", 
+				() -> {
+					boolean x;
+					do {
+						UIFormBuilder f = new UIFormBuilder();
+						f.add("Traffic light green time (seconds) [min = 30.0, max = 180.0]", doubleTest);
+						String[] result = ui.processForm(f.toUIForm("Stop distance"));
+						x = trafficBuilder.setGreenLight(Double.parseDouble(result[0]));
+					} while (!x);
+				});
+		s.add("Set traffic light yellow times", 
+				() -> {
+					boolean x;
+					do {
+						UIFormBuilder f = new UIFormBuilder();
+						f.add("Traffic light yellow time (seconds) [min = 32.0, max = 40.0]", doubleTest);
+						String[] result = ui.processForm(f.toUIForm("Stop distance"));
+						x = trafficBuilder.setGreenLight(Double.parseDouble(result[0]));
+					} while (!x);
+				});
+		s.add("Reset simulation and return to main menu", 
+				() -> {
+						builder.clear();
+						trafficBuilder = new TrafficBuilder(builder); 
+						state = START;
+					}); 
+		s.add("Return to main menu", 
+				() -> { state = START; }); 
+		menus[stateNum] = s.toUIMenu("Change Parameters");
+		
 	}
 	
 //	  1. Show current values

@@ -28,6 +28,8 @@ public interface AnimatorBuilder {
 	 *  If <code>southToNorth</code> is false, then road position 0 is the northmost position.
 	 */
 	public void addVerticalRoad(Road l, int i, int j, boolean southToNorth);
+	
+	public void clear();
 }
 
 /**
@@ -38,6 +40,7 @@ class NullAnimatorBuilder implements AnimatorBuilder {
 	public void addLight(Agent d, int i, int j) { }
 	public void addHorizontalRoad(Road l, int i, int j, boolean eastToWest) { }
 	public void addVerticalRoad(Road l, int i, int j, boolean southToNorth) { }
+	public void clear(){}
 }
 
 /**

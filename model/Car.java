@@ -46,7 +46,7 @@ public class Car implements Agent {
 	
 	//just to keep the party going here are default values
 	public Car(LongRoad longRoad, Model2 model) { 
-		carLength = 10;
+		this.carLength = 10;
 		maxVelocity = 6.0;
 		brakeDistance = 10.0;
 		stopDistance = 1.0;
@@ -79,14 +79,15 @@ public class Car implements Agent {
 		if (longRoad.isDirectionNSWE())
 			currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()-1));
 		else
-			currentRoad = longRoad.nextRoad(Math.max(index--, 0));
+			currentRoad = longRoad.nextRoad(Math.max(--index, 0));
 		
-//		if (currentRoad == null) {
+//		if (index > longRoad.getRoadNum()-1 || index < 0) {
 //			model.removeAgent(this);
-//		} else {
+//		} 
+//		else {
 //			currentRoad.accept(this);
-//			
 //		}
+		
 		segmentPosition = 0;
 	}
 	

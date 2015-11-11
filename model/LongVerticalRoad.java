@@ -22,16 +22,16 @@ public class LongVerticalRoad implements LongRoad {
 		roads.add(r);
 	}
 	
-//	public void createLongRoad(){
-//		for (int i = 0; i<columns; i++){
-//			for (int j = 0; j<=rows; j++)
-//				addRoad(new Road(i , j, false)); //change road length to user input		
-//		}
-//		for (Road r : roads){
-//			r.setIntersection(intersections[r.i][r.j]);
-//		}
-//		roads.get(columns).setIntersection(new NullIntersection());
-//	}
+	public void createLongRoad(){
+		for (int i = 0; i<columns; i++){
+			for (int j = 0; j<=rows; j++)
+				addRoad(new Road(i , j, false)); //change road length to user input		
+		}
+		for (Road r : roads){
+			r.setIntersection(intersections[r.i][r.j]);
+		}
+		roads.get(columns).setIntersection(new NullIntersection());
+	}
 	
 	
 	public boolean isDirectionNSWE(){

@@ -33,6 +33,10 @@ public class TextAnimatorBuilder implements AnimatorBuilder {
 	public void addVerticalRoad(Road l, int i, int j, boolean southToNorth) {
 		animator.addRoad(l,i,j);
 	}
+	
+	public void clear(){
+		animator = new TextAnimator();
+	}
 
 
 	/** Class for drawing the Model. */

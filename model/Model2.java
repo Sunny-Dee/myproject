@@ -13,6 +13,8 @@ public class Model2 extends Observable{
 	private double time;
 
 	public Model2(AnimatorBuilder builder, int rows, int columns) {
+
+		
 		if (rows < 0 || columns < 0 || (rows == 0 && columns == 0)) {
 			throw new IllegalArgumentException();
 		}
@@ -61,7 +63,7 @@ public class Model2 extends Observable{
 		for (int i=0; i<=rows; i++) {
 			for (int j=0; j<=columns; j++) {
 					
-				intersections[i][j] = new Intersection(new Light(2));
+				intersections[i][j] = new Intersection(new Light((int)( Math.random()*10)%3));
 //				if ((i == rows) || (j == columns))
 //					intersections[i][j] = new NullIntersection();
 				builder.addLight(intersections[i][j], i, j);
@@ -74,6 +76,7 @@ public class Model2 extends Observable{
 		boolean eastToWest = false;
 		for (int i=0; i<rows; i++) {
 			LongHorizontalRoad temproad = new LongHorizontalRoad(rows, columns, intersections, eastToWest);
+			
 			for (int j=0; j<=columns; j++) {
 				Road l = new Road(i, j, true);
 				
@@ -111,11 +114,10 @@ public class Model2 extends Observable{
 			southToNorth = !southToNorth;
 		}
 
-		// Add Cars
-//		for (Road l : roads) {
-//			Car car = new Car(l);
-//			agents.add(car);
-//			l.accept(car);
-//		}
+		
+	}
+	
+	public void addAgent(Agent a){
+		agents.add(a);
 	}
 }

@@ -23,16 +23,17 @@ public class LongHorizontalRoad implements LongRoad {
 		roads.add(r);
 	}
 	
-//	public void createLongRoad(){
-//		for (int i = 0; i<rows; i++){
-//			for (int j = 0; j<=columns; j++)
-//				addRoad(new Road(i , j, true)); //change road length to user input		
-//		}
-//		for (Road r : roads){
-//			r.setIntersection(intersections[r.i][r.j]);
-//		}
-//		roads.get(columns).setIntersection(new NullIntersection());
-//	}
+	public void createLongRoad(){
+		for (int i = 0; i<rows; i++){
+			for (int j = 0; j<=columns; j++)
+				addRoad(new Road(i , j, true)); //change road length to user input		
+		}
+		for (Road r : roads){
+			r.setIntersection(intersections[r.i][r.j]);
+		}
+		if (!eastWest)
+			roads.get(columns).setIntersection(new NullIntersection());
+	}
 	
 	
 	public boolean isDirectionNSWE(){
@@ -67,6 +68,13 @@ public class LongHorizontalRoad implements LongRoad {
 			tempList.add(ri.previous());
 		}
 		roads = tempList;
+	}
+	
+	public List<Road> getRoads(){
+		List<Road> result = new ArrayList<Road>();
+		for (Road r : roads)
+			result.add(r);
+		return result;
 	}
 
 }

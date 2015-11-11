@@ -3,8 +3,8 @@ package myproject.model;
 
 public class TrafficBuilder {
 	//TODO set default values for everything. 
-
-	public TrafficBuilder(){};
+	private AnimatorBuilder builder;
+	private Model2 model;
 	
 //	Simulation time step (seconds) [0.1]
 	private double timeStep = 0.1;
@@ -32,6 +32,11 @@ public class TrafficBuilder {
 	private double greenLightTime = 90.0;
 //			Traffic light yellow time (seconds) [min = 32.0, max = 40.0]
 	private double yellowLightTime = 32;
+	
+	public TrafficBuilder(AnimatorBuilder builder){
+		this.builder = builder;
+		model = new Model2(builder, rows, columns);
+	};
 	
 	
 	public void setTimeStep(double newtime){ timeStep = newtime;}
@@ -135,6 +140,12 @@ public class TrafficBuilder {
 		return true;
 	}
 	public double yellowLightTime() { return yellowLightTime;}
+	
+	
+	public void runModel(){
+		model.run(time);
+		model.dispose();
+	}
 	
 	public String toString(){
 		StringBuilder str = new StringBuilder("");
