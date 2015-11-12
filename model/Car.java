@@ -36,10 +36,12 @@ public class Car implements Agent {
 		this.brakeDistance = brakeDistance;
 		this.stopDistance = stopDistance;
 		this.model = model;
-		index = longRoad.isDirectionNSWE() ? longRoad.getRoadNum()-1 : 0 ;
+		index = 0 ;
+//		index = longRoad.isDirectionNSWE() ? longRoad.getRoadNum()-1 : 0 ;
 		this.longRoad = longRoad;
-		currentRoad = longRoad.isDirectionNSWE() ? longRoad.nextRoad(longRoad.getRoadNum()-1):
-												longRoad.nextRoad(index++);
+		currentRoad = longRoad.nextRoad(index++);
+//		currentRoad = longRoad.isDirectionNSWE() ? longRoad.nextRoad(longRoad.getRoadNum()-1):
+//												longRoad.nextRoad(index++);
 		currentRoad.accept(this);
 	}
 	
@@ -60,11 +62,12 @@ public class Car implements Agent {
 	}
 	
 	public void nextRoad(){
+		currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()-1));
 //		currentRoad.sinkCar (this);
-		if (longRoad.isDirectionNSWE())
-			currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()-1));
-		else
-			currentRoad = longRoad.nextRoad(Math.max(index--, 0));
+//		if (longRoad.isDirectionNSWE())
+//			currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()-1));
+//		else
+//			currentRoad = longRoad.nextRoad(Math.max(index--, 0));
 		
 //		if (index > longRoad.getRoadNum()-1 || index < 0) {
 //			model.removeAgent(this);

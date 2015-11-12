@@ -87,48 +87,126 @@ public class Model2 extends Observable{
 			}
 		}
 		
-
+		
+		
 		// Add Horizontal Roads
 		boolean eastToWest = false;
 		for (int i=0; i<rows; i++) {
 			LongHorizontalRoad temproad = new LongHorizontalRoad(rows, columns, intersections, eastToWest);
-			
-			for (int j=0; j<=columns; j++) {
-				Road l = new Road(t.roadSegmentLen(), i, j, true);
-				
-				l.setIntersection(intersections[l.i][l.j]);
-				
-				builder.addHorizontalRoad(l, i, j, eastToWest);
-				roads.add(l);
-				temproad.addRoad(l);
+			if (eastToWest){ //if true, pattern is alternating.
+				for (int j=columns; j>=0; j--) {
+					Road l = new Road(t.roadSegmentLen(), i, j, true);
+					
+					l.setIntersection(intersections[i][j]);
+					
+					builder.addHorizontalRoad(l, i, j, eastToWest);
+					roads.add(l);
+					temproad.addRoad(l);
 
-			}
-			Car car = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
-			agents.add(car);
+				}
+				Car car = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
+				agents.add(car);
+	
+			} 
 			
-//			eastToWest = !eastToWest;
+			else { //pattern is alternating
+				for (int j=0; j<=columns; j++) {
+					Road l = new Road(t.roadSegmentLen(), i, j, true);
+					
+					l.setIntersection(intersections[i][j]);
+					
+					builder.addHorizontalRoad(l, i, j, eastToWest);
+					roads.add(l);
+					temproad.addRoad(l);
+	
+					}
+				Car car = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
+				agents.add(car);
+			}
 			if (!simple) {eastToWest = !eastToWest;}
 		}
+		
+		
+		
 
+//		// Add Horizontal Roads
+//		boolean eastToWest = false;
+//		for (int i=0; i<rows; i++) {
+//			LongHorizontalRoad temproad = new LongHorizontalRoad(rows, columns, intersections, eastToWest);
+//			
+//			for (int j=0; j<=columns; j++) {
+//				Road l = new Road(t.roadSegmentLen(), i, j, true);
+//				
+//				l.setIntersection(intersections[l.i][l.j]);
+//				
+//				builder.addHorizontalRoad(l, i, j, eastToWest);
+//				roads.add(l);
+//				temproad.addRoad(l);
+//
+//			}
+//			Car car = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
+//			agents.add(car);
+//			
+//			if (!simple) {eastToWest = !eastToWest;}
+//		}
+		
+		
+		
 		// Add Vertical Roads
 		boolean southToNorth = false;
 		for (int j=0; j<columns; j++) {
 			LongVerticalRoad temproad2 = new LongVerticalRoad(rows, columns, intersections, southToNorth);
-			for (int i=0; i<=rows; i++) {
-				Road l = new Road(t.roadSegmentLen(), j, i, false);
-				
-				l.setIntersection(intersections[l.j][l.i]);
-				
-				builder.addVerticalRoad(l, i, j, southToNorth);
-				roads.add(l);
-				temproad2.addRoad(l);
+			if (southToNorth){
+				for (int i=rows; i>=0; i--) {
+					Road l = new Road(t.roadSegmentLen(), j, i, false);
+					
+					l.setIntersection(intersections[j][i]);
+					
+					builder.addVerticalRoad(l, i, j, southToNorth);
+
+					temproad2.addRoad(l);
+				}
+				Car car = new Car(temproad2, this, t.maxVel(), t.carLen(),t.breakDist(), t.stopDist());
+				agents.add(car);
 			}
-			Car car = new Car(temproad2, this, t.maxVel(), t.carLen(),t.breakDist(), t.stopDist());
-			agents.add(car);
-			
-//			southToNorth = !southToNorth;
+			else {
+				for (int i=0; i<=rows; i++) {
+					Road l = new Road(t.roadSegmentLen(), j, i, false);
+					
+					l.setIntersection(intersections[j][i]);
+					
+					builder.addVerticalRoad(l, i, j, southToNorth);
+					roads.add(l);
+					temproad2.addRoad(l);
+				}
+				Car car = new Car(temproad2, this, t.maxVel(), t.carLen(),t.breakDist(), t.stopDist());
+				agents.add(car);
+			}
 			if (!simple) {southToNorth = !southToNorth;}
 		}
+		
+		
+		
+
+//		// Add Vertical Roads
+//		boolean southToNorth = false;
+//		for (int j=0; j<columns; j++) {
+//			LongVerticalRoad temproad2 = new LongVerticalRoad(rows, columns, intersections, southToNorth);
+//			for (int i=0; i<=rows; i++) {
+//				Road l = new Road(t.roadSegmentLen(), j, i, false);
+//				
+//				l.setIntersection(intersections[l.j][l.i]);
+//				
+//				builder.addVerticalRoad(l, i, j, southToNorth);
+//				roads.add(l);
+//				temproad2.addRoad(l);
+//			}
+//			Car car = new Car(temproad2, this, t.maxVel(), t.carLen(),t.breakDist(), t.stopDist());
+//			agents.add(car);
+//			
+////			southToNorth = !southToNorth;
+//			if (!simple) {southToNorth = !southToNorth;}
+//		}
 
 		
 	}
