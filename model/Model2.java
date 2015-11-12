@@ -31,7 +31,7 @@ public class Model2 extends Observable{
 		setup(builder, rows, columns);
 		this.animator = builder.getAnimator();
 		super.addObserver(animator);
-		simple = t.pattern() == 1 ? true : false; 
+		simple = t.pattern(); 
 	}
 	
 	public void run(double duration) {
@@ -63,6 +63,7 @@ public class Model2 extends Observable{
 	 * Construct the model, establishing correspondences with the visualizer.
 	 */
 	private void setup(AnimatorBuilder builder, int rows, int columns) {
+		simple = t.pattern();
 		List<Road> roads = new ArrayList<Road>();
 		Agent[][] intersections = new Agent[rows+1][columns+1];
 
@@ -74,6 +75,13 @@ public class Model2 extends Observable{
 						t.greenLightTime(), t.yellowLightTime()));
 //				if ((i == rows) || (j == columns))
 //					intersections[i][j] = new NullIntersection();
+//				builder.addLight(intersections[i][j], i, j);
+//				agents.add(intersections[i][j]);
+			}
+		}
+		
+		for (int i=0; i<rows; i++) {
+			for (int j=0; j<columns; j++) {
 				builder.addLight(intersections[i][j], i, j);
 				agents.add(intersections[i][j]);
 			}
@@ -98,7 +106,8 @@ public class Model2 extends Observable{
 			Car car = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
 			agents.add(car);
 			
-			eastToWest = !eastToWest;
+//			eastToWest = !eastToWest;
+			if (!simple) {eastToWest = !eastToWest;}
 		}
 
 		// Add Vertical Roads
@@ -117,7 +126,8 @@ public class Model2 extends Observable{
 			Car car = new Car(temproad2, this, t.maxVel(), t.carLen(),t.breakDist(), t.stopDist());
 			agents.add(car);
 			
-			southToNorth = !southToNorth;
+//			southToNorth = !southToNorth;
+			if (!simple) {southToNorth = !southToNorth;}
 		}
 
 		

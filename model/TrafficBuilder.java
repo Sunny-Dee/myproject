@@ -16,7 +16,7 @@ public class TrafficBuilder {
 	private int columns = 3;
 	
 //			Traffic pattern [simple]
-	private int pattern = 1;
+	private int pattern = 2;
 	
 //			Car entry rate (seconds/car) [min = 1.0, max = 2.5]
 	private double entryRate = 1.0; //ThreadLocalRandom.current().nextDouble(1.0, 2.5 + 1) ; 
@@ -79,7 +79,9 @@ public class TrafficBuilder {
 		else
 			return "[alternating]";
 	}
-	public int pattern() { return pattern;}
+	public boolean pattern() { 
+		return pattern == 1;
+	}
 	
 	public boolean setEntryRate(double newEntryRate){
 		if (newEntryRate < 1.0 || newEntryRate > 2.5)
