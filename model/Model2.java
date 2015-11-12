@@ -14,6 +14,7 @@ public class Model2 extends Observable{
 	private TrafficBuilder t;
 	private int rows;
 	private int columns;
+	private boolean simple;
 
 	public Model2(AnimatorBuilder builder, TrafficBuilder t) {
 		this.t = t;
@@ -30,6 +31,7 @@ public class Model2 extends Observable{
 		setup(builder, rows, columns);
 		this.animator = builder.getAnimator();
 		super.addObserver(animator);
+		simple = t.pattern() == 1 ? true : false; 
 	}
 	
 	public void run(double duration) {
@@ -84,7 +86,7 @@ public class Model2 extends Observable{
 			LongHorizontalRoad temproad = new LongHorizontalRoad(rows, columns, intersections, eastToWest);
 			
 			for (int j=0; j<=columns; j++) {
-				Road l = new Road( i, j, true);
+				Road l = new Road(t.roadSegmentLen(), i, j, true);
 				
 				l.setIntersection(intersections[l.i][l.j]);
 				
@@ -104,7 +106,7 @@ public class Model2 extends Observable{
 		for (int j=0; j<columns; j++) {
 			LongVerticalRoad temproad2 = new LongVerticalRoad(rows, columns, intersections, southToNorth);
 			for (int i=0; i<=rows; i++) {
-				Road l = new Road(j, i, false);
+				Road l = new Road(t.roadSegmentLen(), j, i, false);
 				
 				l.setIntersection(intersections[l.j][l.i]);
 				

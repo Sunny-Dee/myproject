@@ -160,7 +160,7 @@ public class Controls {
 					boolean x;
 					do {
 						UIFormBuilder f = new UIFormBuilder();
-						f.add("Road segment length (meters) [min = 10.0, max = 15.0]", doubleTest);
+						f.add("Road segment length (meters) [min = 10.0, max = 20.0]", doubleTest);
 						String[] result = ui.processForm(f.toUIForm("Road length"));
 						x = trafficBuilder.setRoadSegmentLength(Double.parseDouble(result[0]));
 					} while (!x);

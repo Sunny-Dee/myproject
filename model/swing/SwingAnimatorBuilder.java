@@ -41,15 +41,15 @@ public class SwingAnimatorBuilder implements AnimatorBuilder {
 		painter.addLight(d,t);
 	}
 	public void addHorizontalRoad(Road l, int i, int j, boolean eastToWest) {
-		double x = skipInit + j*skipRoadCar;
-		double y = skipInit + skipRoad + i*skipRoadCar;
+		double x = skipInit + j*(VP.gap + l.getRoadLength() + skipCar);
+		double y = skipInit + VP.gap + l.getRoadLength() + i*(VP.gap + l.getRoadLength() + skipCar);
 		Translator t = eastToWest ? new TranslatorEW(x, y, l.getRoadLength(), VP.elementWidth, VP.scaleFactor)
 				: new TranslatorWE(x, y, l.getRoadLength(), VP.elementWidth, VP.scaleFactor);
 		painter.addRoad(l,t);
 	}
 	public void addVerticalRoad(Road l, int i, int j, boolean southToNorth) {
-		double x = skipInit + skipRoad + j*skipRoadCar;
-		double y = skipInit + i*skipRoadCar;
+		double x = skipInit + VP.gap + l.getRoadLength() + j*(VP.gap + l.getRoadLength() + skipCar);
+		double y = skipInit + i*(skipCar + VP.gap + l.getRoadLength());
 		Translator t = southToNorth ? new TranslatorSN(x, y, l.getRoadLength(), VP.elementWidth, VP.scaleFactor)
 				: new TranslatorNS(x, y, l.getRoadLength(), VP.elementWidth, VP.scaleFactor);
 		painter.addRoad(l,t);

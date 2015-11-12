@@ -22,7 +22,7 @@ public class TrafficBuilder {
 	private double entryRate = 1.0; //ThreadLocalRandom.current().nextDouble(1.0, 2.5 + 1) ; 
 	
 //			Road segment length (meters) [min = 10.0, max = 15.0]
-	private double roadSegmentLength = 10; 
+	private double roadSegmentLength = 20; 
 	
 //			Intersection length (meters) [min = 10.0, max  = 15.0]
 	private double intersectionLength = 10;
@@ -95,10 +95,10 @@ public class TrafficBuilder {
 		roadSegmentLength = newLength;
 		return true;
 	}
-	public double roadSegmentLen() { return roadSegmentLength*100;}
+	public double roadSegmentLen() { return roadSegmentLength*10;}
 	
 	public boolean setIntersectionLength(double newLength){
-		if (newLength < 10.0 || newLength > 15.0)
+		if (newLength < 10.0 || newLength > 20.0)
 			return false;
 		intersectionLength = newLength;
 		return true;
