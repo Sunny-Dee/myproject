@@ -16,12 +16,12 @@ public class Light implements Agent {
 	 private int state; 
 	 private double duration;
 	
-	public Light(int state) { 
+	public Light(int state, double greenDurationNS, double yellowDurationNS) { 
 		tempstate = false;
 		this.state = state%3;
+		this.greenDurationNS = greenDurationNS;
+		this.yellowDurationNS = yellowDurationNS;
 		
-		greenDurationNS  = 50.0;
-		yellowDurationNS = 30.0;
 		greenDurationEW  = 50.0;
 		yellowDurationEW = 30.0;
 		

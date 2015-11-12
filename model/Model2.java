@@ -11,9 +11,14 @@ public class Model2 extends Observable{
 	private Animator animator;
 	private boolean disposed;
 	private double time;
+	private TrafficBuilder t;
+	private int rows;
+	private int columns;
 
-	public Model2(AnimatorBuilder builder, int rows, int columns) {
-
+	public Model2(AnimatorBuilder builder, TrafficBuilder t) {
+		this.t = t;
+		rows = t.rows();
+		columns = t.columns();
 		
 		if (rows < 0 || columns < 0 || (rows == 0 && columns == 0)) {
 			throw new IllegalArgumentException();
@@ -63,7 +68,8 @@ public class Model2 extends Observable{
 		for (int i=0; i<=rows; i++) {
 			for (int j=0; j<=columns; j++) {
 					
-				intersections[i][j] = new Intersection(new Light((int)( Math.random()*10)%3));
+				intersections[i][j] = new Intersection(new Light((int)( Math.random()*10)%3, 
+						t.greenLightTime(), t.yellowLightTime()));
 //				if ((i == rows) || (j == columns))
 //					intersections[i][j] = new NullIntersection();
 				builder.addLight(intersections[i][j], i, j);
@@ -78,7 +84,7 @@ public class Model2 extends Observable{
 			LongHorizontalRoad temproad = new LongHorizontalRoad(rows, columns, intersections, eastToWest);
 			
 			for (int j=0; j<=columns; j++) {
-				Road l = new Road(i, j, true);
+				Road l = new Road( i, j, true);
 				
 				l.setIntersection(intersections[l.i][l.j]);
 				
@@ -87,7 +93,7 @@ public class Model2 extends Observable{
 				temproad.addRoad(l);
 
 			}
-			Car car = new Car(temproad, this);
+			Car car = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
 			agents.add(car);
 			
 			eastToWest = !eastToWest;
@@ -105,10 +111,8 @@ public class Model2 extends Observable{
 				builder.addVerticalRoad(l, i, j, southToNorth);
 				roads.add(l);
 				temproad2.addRoad(l);
-
-	
 			}
-			Car car = new Car(temproad2, this);
+			Car car = new Car(temproad2, this, t.maxVel(), t.carLen(),t.breakDist(), t.stopDist());
 			agents.add(car);
 			
 			southToNorth = !southToNorth;
@@ -119,5 +123,6 @@ public class Model2 extends Observable{
 	
 	public void addAgent(Agent a){
 		agents.add(a);
-	}
+	}	
+	
 }

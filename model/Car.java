@@ -29,27 +29,12 @@ public class Car implements Agent {
 	private double distanceToNextCar = 10000000; //something really high before more cars come along
 	private Model2 model;
 
-//	public Car(double carLength, double maxVelocity, double brakeDistance, LongRoad longRoad, Model2 model) { 
-//		this.carLength = carLength;
-//		
-//		this.maxVelocity = maxVelocity;
-//		this.brakeDistance = brakeDistance;
-//		this.longRoad = longRoad;
-//		this.model = model;
-//		index = 0;
-//		currentRoad = longRoad.nextRoad(index++);
-//		currentRoad.accept(this);
-//		
-//		
-//
-//	} // Created only by this package
-	
-	//just to keep the party going here are default values
-	public Car(LongRoad longRoad, Model2 model) { 
-		this.carLength = 10;
-		maxVelocity = 6.0;
-		brakeDistance = 10.0;
-		stopDistance = 1.0;
+	public Car(LongRoad longRoad, Model2 model, double maxVelocity, 
+			double carLength, double brakeDistance, double stopDistance) { 
+		this.carLength = carLength;
+		this.maxVelocity = maxVelocity;
+		this.brakeDistance = brakeDistance;
+		this.stopDistance = stopDistance;
 		this.model = model;
 		index = longRoad.isDirectionNSWE() ? longRoad.getRoadNum()-1 : 0 ;
 		this.longRoad = longRoad;
@@ -79,7 +64,7 @@ public class Car implements Agent {
 		if (longRoad.isDirectionNSWE())
 			currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()-1));
 		else
-			currentRoad = longRoad.nextRoad(Math.max(--index, 0));
+			currentRoad = longRoad.nextRoad(Math.max(index--, 0));
 		
 //		if (index > longRoad.getRoadNum()-1 || index < 0) {
 //			model.removeAgent(this);

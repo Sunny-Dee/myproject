@@ -60,10 +60,11 @@ public class LongVerticalRoad implements LongRoad {
 	}
 	
 	public void reverseRoads(){
-		ListIterator<Road> ri = roads.listIterator();
+		ListIterator<Road> ri = roads.listIterator(roads.size());
 		List<Road> tempList = new ArrayList<Road>();
 		while (ri.hasPrevious()){
 			tempList.add(ri.previous());
+			
 		}
 		roads = tempList;
 	}

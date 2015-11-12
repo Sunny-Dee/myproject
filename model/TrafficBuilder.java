@@ -1,41 +1,54 @@
 package myproject.model;
 //import java.util.concurrent.ThreadLocalRandom;
 
-public class TrafficBuilder {
-	//TODO set default values for everything. 
+public class TrafficBuilder { 
 	private AnimatorBuilder builder;
 	private Model2 model;
 	
 //	Simulation time step (seconds) [0.1]
 	private double timeStep = 0.1;
+	
 //			Simulation run time (seconds) [1000]
 	private double time = 1000;
+	
 //			Grid size (number of roads) [row = 2, column 3 
 	private int rows = 2;
 	private int columns = 3;
+	
 //			Traffic pattern [simple]
 	private int pattern = 1;
+	
 //			Car entry rate (seconds/car) [min = 1.0, max = 2.5]
 	private double entryRate = 1.0; //ThreadLocalRandom.current().nextDouble(1.0, 2.5 + 1) ; 
+	
 //			Road segment length (meters) [min = 10.0, max = 15.0]
 	private double roadSegmentLength = 10; 
+	
 //			Intersection length (meters) [min = 10.0, max  = 15.0]
 	private double intersectionLength = 10;
+	
 //			Car length (meters) [min = 10.0, max  = 15.0]
 	private double carLength = 10;
+	
 //			Car maximum velocity (meters/second) [min = 1.0, max = 3.0]  
-	private double maxVelocity = 1.0;
+	private double minVelocity = 1.0;
+	private double maxVelocity = 3.0;
+	
 //			Car stop distance (meters) [min = 0.5, max = 5.0]
 	private double stopDistance = 1.0;
-	private double breakDistance = 9.0; //[min = 9.0, max = 10.0]
+	
+	//[min = 9.0, max = 10.0]
+	private double breakDistance = 9.0; 
+	
 //			Traffic light green time (seconds) [min = 30.0, max = 180.0]
-	private double greenLightTime = 90.0;
+	private double greenLightTime = 50.0;
+	
 //			Traffic light yellow time (seconds) [min = 32.0, max = 40.0]
-	private double yellowLightTime = 32;
+	private double yellowLightTime = 30.0;
 	
 	public TrafficBuilder(AnimatorBuilder builder){
 		this.builder = builder;
-		model = new Model2(builder, rows, columns);
+		model = new Model2(builder, this);
 	};
 	
 	
