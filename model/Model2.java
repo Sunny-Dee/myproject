@@ -64,7 +64,6 @@ public class Model2 extends Observable{
 	 */
 	private void setup(AnimatorBuilder builder, int rows, int columns) {
 		simple = t.pattern();
-		List<Road> roads = new ArrayList<Road>();
 		Agent[][] intersections = new Agent[rows+1][columns+1];
 
 		//Add Intersections
@@ -73,10 +72,6 @@ public class Model2 extends Observable{
 					
 				intersections[i][j] = new Intersection(new Light((int)( Math.random()*10)%3, 
 						t.greenLightTime(), t.yellowLightTime()));
-//				if ((i == rows) || (j == columns))
-//					intersections[i][j] = new NullIntersection();
-//				builder.addLight(intersections[i][j], i, j);
-//				agents.add(intersections[i][j]);
 			}
 		}
 		
@@ -98,9 +93,10 @@ public class Model2 extends Observable{
 					Road l = new Road(t.roadSegmentLen(), i, j, true);
 					
 					l.setIntersection(intersections[i][j]);
+					if (j == 0) 
+						l.setIntersection(new NullIntersection());
 					
 					builder.addHorizontalRoad(l, i, j, eastToWest);
-					roads.add(l);
 					temproad.addRoad(l);
 
 				}
@@ -114,9 +110,10 @@ public class Model2 extends Observable{
 					Road l = new Road(t.roadSegmentLen(), i, j, true);
 					
 					l.setIntersection(intersections[i][j]);
+					if (j == columns)
+						l.setIntersection(new NullIntersection());
 					
 					builder.addHorizontalRoad(l, i, j, eastToWest);
-					roads.add(l);
 					temproad.addRoad(l);
 	
 					}
@@ -126,30 +123,7 @@ public class Model2 extends Observable{
 			if (!simple) {eastToWest = !eastToWest;}
 		}
 		
-		
-		
 
-//		// Add Horizontal Roads
-//		boolean eastToWest = false;
-//		for (int i=0; i<rows; i++) {
-//			LongHorizontalRoad temproad = new LongHorizontalRoad(rows, columns, intersections, eastToWest);
-//			
-//			for (int j=0; j<=columns; j++) {
-//				Road l = new Road(t.roadSegmentLen(), i, j, true);
-//				
-//				l.setIntersection(intersections[l.i][l.j]);
-//				
-//				builder.addHorizontalRoad(l, i, j, eastToWest);
-//				roads.add(l);
-//				temproad.addRoad(l);
-//
-//			}
-//			Car car = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
-//			agents.add(car);
-//			
-//			if (!simple) {eastToWest = !eastToWest;}
-//		}
-		
 		
 		
 		// Add Vertical Roads
@@ -159,11 +133,11 @@ public class Model2 extends Observable{
 			if (southToNorth){
 				for (int i=rows; i>=0; i--) {
 					Road l = new Road(t.roadSegmentLen(), j, i, false);
-					
 					l.setIntersection(intersections[j][i]);
+					if (i == 0)
+						l.setIntersection(new NullIntersection());
 					
 					builder.addVerticalRoad(l, i, j, southToNorth);
-
 					temproad2.addRoad(l);
 				}
 				Car car = new Car(temproad2, this, t.maxVel(), t.carLen(),t.breakDist(), t.stopDist());
@@ -172,11 +146,11 @@ public class Model2 extends Observable{
 			else {
 				for (int i=0; i<=rows; i++) {
 					Road l = new Road(t.roadSegmentLen(), j, i, false);
-					
 					l.setIntersection(intersections[j][i]);
+					if (i == rows)
+						l.setIntersection(new NullIntersection());
 					
 					builder.addVerticalRoad(l, i, j, southToNorth);
-					roads.add(l);
 					temproad2.addRoad(l);
 				}
 				Car car = new Car(temproad2, this, t.maxVel(), t.carLen(),t.breakDist(), t.stopDist());
@@ -184,30 +158,6 @@ public class Model2 extends Observable{
 			}
 			if (!simple) {southToNorth = !southToNorth;}
 		}
-		
-		
-		
-
-//		// Add Vertical Roads
-//		boolean southToNorth = false;
-//		for (int j=0; j<columns; j++) {
-//			LongVerticalRoad temproad2 = new LongVerticalRoad(rows, columns, intersections, southToNorth);
-//			for (int i=0; i<=rows; i++) {
-//				Road l = new Road(t.roadSegmentLen(), j, i, false);
-//				
-//				l.setIntersection(intersections[l.j][l.i]);
-//				
-//				builder.addVerticalRoad(l, i, j, southToNorth);
-//				roads.add(l);
-//				temproad2.addRoad(l);
-//			}
-//			Car car = new Car(temproad2, this, t.maxVel(), t.carLen(),t.breakDist(), t.stopDist());
-//			agents.add(car);
-//			
-////			southToNorth = !southToNorth;
-//			if (!simple) {southToNorth = !southToNorth;}
-//		}
-
 		
 	}
 	

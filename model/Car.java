@@ -62,10 +62,6 @@ public class Car implements Agent {
 	public void nextRoad(){
 		currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()-1));
 //		currentRoad.sinkCar (this);
-//		if (longRoad.isDirectionNSWE())
-//			currentRoad = longRoad.nextRoad(Math.min(index++ , longRoad.getRoadNum()-1));
-//		else
-//			currentRoad = longRoad.nextRoad(Math.max(index--, 0));
 		
 //		if (index > longRoad.getRoadNum()-1 || index < 0) {
 //			model.removeAgent(this);
@@ -113,7 +109,7 @@ public class Car implements Agent {
 		if (isAtIntersection()){
 			if (currentRoad.intersection.isNull()){
 				currentRoad.sinkCar(this);
-				position +=0;
+				position +=10000;
 			}
 			else if (longRoad.carCanGo(currentRoad)){ // && ((index < longRoad.getRoadNum()) || (index != 0))){
 				position += currentRoad.intersection.getDimension() + carLength;
