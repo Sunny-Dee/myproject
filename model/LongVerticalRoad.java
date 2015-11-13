@@ -6,15 +6,9 @@ import java.util.ListIterator;
 
 public class LongVerticalRoad extends LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
-	public int rows;
-	public int columns;
-	Agent[][] intersections;
 	public boolean northSouth;
 	
-	public LongVerticalRoad(int rows, int columns, Agent[][] intersections, boolean orientationNS){
-		this.rows = rows;
-		this.columns = columns;
-		this.intersections = intersections; 
+	public LongVerticalRoad(boolean orientationNS){
 		northSouth = orientationNS;
 	};
 	

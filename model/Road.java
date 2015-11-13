@@ -15,18 +15,14 @@ public class Road {
 	public Agent intersection;
 	public boolean horizontal;
 	
-	public Road(int i, int j, boolean horizontal) { 
-		roadLength = 200;
-		this.i = i;
-		this.j = j;
-		roadID = ++roadTracker;
-		this.horizontal = horizontal;
-	} // Created only by this package. Deliana changed it to public. Change this later
+//	public Road(int i, int j, boolean horizontal) { 
+//		roadLength = 200;
+//		roadID = ++roadTracker;
+//		this.horizontal = horizontal;
+//	} // Created only by this package. Deliana changed it to public. Change this later
 	
-	public Road(double roadLength, int i, int j, boolean horizontal) { 
+	public Road(double roadLength, boolean horizontal) { 
 		this.roadLength = roadLength;
-		this.i = i;
-		this.j = j;
 		roadID = ++roadTracker;
 		this.horizontal = horizontal;
 	}
@@ -69,17 +65,18 @@ public class Road {
 	
 	public boolean canGo(){
 		int s = intersection.getState();
-		if (s == -1) return false;
-		if (!horizontal){
+		if (s == -1) { return false ;}
+		if (horizontal){
 			if (s <= 1)
 				return true;
-			else
+			else 
 				return false;
+
 		}
 		else{
 			if (s <= 1)
 				return false;
-			else 
+			else
 				return true;
 		}
 

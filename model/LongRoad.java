@@ -7,10 +7,7 @@ import myproject.model.Road;
 
 public abstract class LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
-	public int rows;
-	public int columns;
 	Agent[][] intersections;
-//	public boolean northSouthorEastWest;
 
 	LongRoad(){};
 	
@@ -25,10 +22,6 @@ public abstract class LongRoad {
 	
 	public boolean carCanGo(Road r){
 		return r.canGo();
-	}
-	
-	public String roadIndex(Road r){
-		return "(" + r.i + "," + r.j + ")";
 	}
 	
 	public int getRoadNum() {

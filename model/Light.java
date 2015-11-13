@@ -11,16 +11,16 @@ public class Light implements Agent {
 	 private double yellowDurationNS; // Duration of the North/South yellow phase (in seconds)
 	 private double greenDurationEW;  // Duration of the East/West green phase (in seconds)
 	 private double yellowDurationEW; // Duration of the East/West yellow phase (in seconds)
-	 private boolean tempstate;
 	 private java.awt.Color color;
 	 private int state; 
 	 private double duration;
+	 private double dimension; 
 	
-	public Light(int state, double greenDurationNS, double yellowDurationNS) { 
-		tempstate = false;
+	public Light(int state, double dimension, double greenDurationNS, double yellowDurationNS) { 
 		this.state = state%3;
 		this.greenDurationNS = greenDurationNS;
 		this.yellowDurationNS = yellowDurationNS;
+		this.dimension = dimension;
 		
 		greenDurationEW  = 50.0;
 		yellowDurationEW = 30.0;
@@ -28,18 +28,6 @@ public class Light implements Agent {
 		setColor();
 	} // Created only by this package. Default values. I changed it to public
 
-	Light(int state, double greenDurationNS, double yellowDurationNS, 
-			double greenDurationEW, double yellowDurationEW) { 
-		tempstate = false;
-		this.state = state%3;
-		
-		this.greenDurationNS  = greenDurationNS;
-		this.yellowDurationNS = yellowDurationNS;
-		this.greenDurationEW  = greenDurationEW;
-		this.yellowDurationEW = yellowDurationEW;
-		
-		setColor();
-	} // Created only by this package
 
 //	public boolean getState() {
 //		return tempstate;
@@ -54,12 +42,6 @@ public class Light implements Agent {
 	};
 	
 
-	
-	//THE FOLLOWING TWO METHODS ARE JUST SO I CAN KEEP PLAYING WITH THIS!!!!!
-	//MUST FIX LATER
-	public void setTempBoolean(){
-		tempstate = !tempstate; 
-	}
 	
 	public java.awt.Color getColor() {
 		return color;
@@ -82,9 +64,6 @@ public class Light implements Agent {
 	
 	
 	public void run(double time) {
-//		if (time%70==0) {
-//			tempstate = !tempstate;
-//		}
 		
 		duration = duration - 1;
 		if (duration == 0){
@@ -96,7 +75,7 @@ public class Light implements Agent {
 
 	//Temporarily hard coding this but will change it later. 
 	public double getDimension() {
-		return 10;
+		return dimension;
 	}
 	
 }

@@ -71,7 +71,7 @@ public class Model2 extends Observable{
 			for (int j=0; j<=columns; j++) {
 					
 				intersections[i][j] = new Intersection(new Light((int)( Math.random()*10)%3, 
-						t.greenLightTime(), t.yellowLightTime()));
+						t.intersectionLen(),t.greenLightTime(), t.yellowLightTime()));
 			}
 		}
 		
@@ -87,10 +87,10 @@ public class Model2 extends Observable{
 		// Add Horizontal Roads
 		boolean eastToWest = false;
 		for (int i=0; i<rows; i++) {
-			LongHorizontalRoad temproad = new LongHorizontalRoad(rows, columns, intersections, eastToWest);
+			LongHorizontalRoad temproad = new LongHorizontalRoad(eastToWest);
 			if (eastToWest){ //if true, pattern is alternating.
 				for (int j=columns; j>=0; j--) {
-					Road l = new Road(t.roadSegmentLen(), i, j, true);
+					Road l = new Road(t.roadSegmentLen(), true);
 					
 					l.setIntersection(intersections[i][j]);
 					if (j == 0) 
@@ -105,9 +105,9 @@ public class Model2 extends Observable{
 	
 			} 
 			
-			else { //pattern is alternating
+			else { //pattern is not alternating
 				for (int j=0; j<=columns; j++) {
-					Road l = new Road(t.roadSegmentLen(), i, j, true);
+					Road l = new Road(t.roadSegmentLen(),true);
 					
 					l.setIntersection(intersections[i][j]);
 					if (j == columns)
@@ -129,10 +129,10 @@ public class Model2 extends Observable{
 		// Add Vertical Roads
 		boolean southToNorth = false;
 		for (int j=0; j<columns; j++) {
-			LongVerticalRoad temproad2 = new LongVerticalRoad(rows, columns, intersections, southToNorth);
+			LongVerticalRoad temproad2 = new LongVerticalRoad(southToNorth);
 			if (southToNorth){
 				for (int i=rows; i>=0; i--) {
-					Road l = new Road(t.roadSegmentLen(), j, i, false);
+					Road l = new Road(t.roadSegmentLen(),false);
 					l.setIntersection(intersections[j][i]);
 					if (i == 0)
 						l.setIntersection(new NullIntersection());
@@ -145,7 +145,7 @@ public class Model2 extends Observable{
 			}
 			else {
 				for (int i=0; i<=rows; i++) {
-					Road l = new Road(t.roadSegmentLen(), j, i, false);
+					Road l = new Road(t.roadSegmentLen(),false);
 					l.setIntersection(intersections[j][i]);
 					if (i == rows)
 						l.setIntersection(new NullIntersection());

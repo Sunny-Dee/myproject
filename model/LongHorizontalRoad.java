@@ -2,20 +2,14 @@ package myproject.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
+//import java.util.ListIterator;
 
 public class LongHorizontalRoad extends LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
-	public int rows;
-	public int columns;
-	Agent[][] intersections;
 	public boolean eastWest;
 
 	
-	public LongHorizontalRoad(int rows, int columns, Agent[][] intersections, boolean orientationEW){
-		this.rows = rows;
-		this.columns = columns;
-		this.intersections = intersections; 
+	public LongHorizontalRoad(boolean orientationEW){
 		eastWest = orientationEW;
 	};
 	
@@ -30,14 +24,14 @@ public class LongHorizontalRoad extends LongRoad {
 //	}
 	
 	
-	public void reverseRoads(){
-		ListIterator<Road> ri = roads.listIterator();
-		List<Road> tempList = new ArrayList<Road>();
-		while (ri.hasPrevious()){
-			tempList.add(ri.previous());
-		}
-		roads = tempList;
-	}
+//	public void reverseRoads(){
+//		ListIterator<Road> ri = roads.listIterator();
+//		List<Road> tempList = new ArrayList<Road>();
+//		while (ri.hasPrevious()){
+//			tempList.add(ri.previous());
+//		}
+//		roads = tempList;
+//	}
 	
 	public List<Road> getRoads(){
 		List<Road> result = new ArrayList<Road>();

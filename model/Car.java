@@ -39,7 +39,6 @@ public class Car implements Agent {
 		index = 0 ;
 		this.longRoad = longRoad;
 		currentRoad = longRoad.nextRoad(index++);
-
 		currentRoad.accept(this);
 	}
 	
@@ -69,7 +68,7 @@ public class Car implements Agent {
 //		else {
 //			currentRoad.accept(this);
 //		}
-		
+//		
 		segmentPosition = 0;
 	}
 	
@@ -100,7 +99,7 @@ public class Car implements Agent {
 	
 	
 	private boolean isAtIntersection(){
-		return currentRoad.getRoadLength() <= (carLength + segmentPosition);
+		return currentRoad.getRoadLength() <= (carLength + segmentPosition + stopDistance);
 	}
 	
 	
@@ -110,6 +109,7 @@ public class Car implements Agent {
 			if (currentRoad.intersection.isNull()){
 				currentRoad.sinkCar(this);
 				position +=10000;
+				sunk = true;
 			}
 			else if (longRoad.carCanGo(currentRoad)){ // && ((index < longRoad.getRoadNum()) || (index != 0))){
 				position += currentRoad.intersection.getDimension() + carLength;
