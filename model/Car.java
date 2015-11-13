@@ -37,11 +37,9 @@ public class Car implements Agent {
 		this.stopDistance = stopDistance;
 		this.model = model;
 		index = 0 ;
-//		index = longRoad.isDirectionNSWE() ? longRoad.getRoadNum()-1 : 0 ;
 		this.longRoad = longRoad;
 		currentRoad = longRoad.nextRoad(index++);
-//		currentRoad = longRoad.isDirectionNSWE() ? longRoad.nextRoad(longRoad.getRoadNum()-1):
-//												longRoad.nextRoad(index++);
+
 		currentRoad.accept(this);
 	}
 	
