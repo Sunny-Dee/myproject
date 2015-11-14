@@ -7,41 +7,49 @@ public class CarGenerator implements Agent {
 	private double carLength;
 	private double stopDistance;
 	private double brakeDistance;
+	private double entryRate;
 
 	CarGenerator(LongRoad longRoad, Model2 model, double carVelocity, double carLength, double brakeDistance,
-			double stopDistance) {
+			double stopDistance, double entryRate) {
 		this.longRoad = longRoad;
 		this.model = model;
 		this.carVelocity = carVelocity;
 		this.carLength = carLength;
 		this.brakeDistance = brakeDistance;
 		this.stopDistance = stopDistance;
+		this.entryRate = entryRate*10;
 
 	}
 
-	@Override
 	public void run(double time) {
-		// TODO Auto-generated method stub
-		if (time % 7 == 0) {
+		if ((time%entryRate) == 0) {
 			Car car = new Car(longRoad, model, carVelocity, carLength, brakeDistance, stopDistance);
 			model.addAgent(car);
 		}
+		
+//		Car car = new Car(longRoad, model, carVelocity, carLength, brakeDistance, stopDistance);
+//		model.addAgent(car);
+//
+//		
+//		entryRate--;
+//		if (entryRate == 0){
+//			Car car = new Car(longRoad, model, carVelocity, carLength, brakeDistance, stopDistance);
+//			model.addAgent(car);
+//			entryRate = 2;
+//			model.addAgent(car);
+//		}
 	}
 
 	public boolean isNull() {
 		return false;
 	}
 
-	@Override
 	public double getDimension() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public int getState() {
-		// TODO Auto-generated method stub
-		return 0;
+		return -1;
 	}
 
 }

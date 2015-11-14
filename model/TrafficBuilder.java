@@ -39,7 +39,7 @@ public class TrafficBuilder {
 	private double stopDistance = 1.0;
 
 	// [min = 9.0, max = 10.0]
-	private double breakDistance = 9.0;
+	private double breakDistance = 10.0;
 
 	// Traffic light green time (seconds) [min = 30.0, max = 180.0]
 	private double greenLightTime = 50.0;

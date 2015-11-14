@@ -92,10 +92,24 @@ public class Car implements Agent {
 	private double update() {
 		distanceToObstacle = (Math.min(currentRoad.getRoadLength() - segmentPosition - carLength, distanceToNextCar));
 
-		double velocity = (maxVelocity / (brakeDistance - stopDistance)) * (distanceToObstacle - stopDistance);
-
-		velocity = Math.max(0.0, velocity);
-		velocity = Math.min(maxVelocity, velocity);
+//		double velocity = (maxVelocity / (brakeDistance - stopDistance)) * (distanceToObstacle - stopDistance);
+//
+//		velocity = Math.max(0.0, velocity);
+//		velocity = Math.min(maxVelocity, velocity);
+		
+		// If distance to nearest obstacle is <=
+		// brakeDistance,
+// then the car will start to slow down (in meters)
+		double velocity;
+		
+		if (distanceToObstacle > brakeDistance)
+			velocity = maxVelocity;
+		else {
+			if(distanceToObstacle <= stopDistance)
+				velocity = 0;
+			else
+				velocity = 1;
+		}		
 
 		return velocity;
 	}
@@ -127,8 +141,8 @@ public class Car implements Agent {
 			}
 		} else {
 			double v = update();
-			segmentPosition += 2;
-			position += 2;
+			segmentPosition += v;
+			position += v;
 		}
 	}
 

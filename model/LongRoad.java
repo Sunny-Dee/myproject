@@ -9,9 +9,9 @@ import myproject.model.Road;
 public abstract class LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
 	Agent[][] intersections;
+//	public boolean oppositeDirection;
 
-	LongRoad() {
-	};
+	LongRoad() {};
 
 	public void addRoad(Road r) {
 		roads.add(r);
