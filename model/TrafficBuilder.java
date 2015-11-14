@@ -3,7 +3,7 @@ package myproject.model;
 
 public class TrafficBuilder {
 	private AnimatorBuilder builder;
-	private Model2 model;
+	private Model model;
 
 	// Simulation time step (seconds) [0.1]
 	private double timeStep = 0.1;
@@ -49,7 +49,7 @@ public class TrafficBuilder {
 
 	public TrafficBuilder(AnimatorBuilder builder) {
 		this.builder = builder;
-		model = new Model2(builder, this);
+		model = new Model(builder, this);
 	};
 
 	public void setTimeStep(double newtime) {

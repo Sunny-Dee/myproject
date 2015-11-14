@@ -2,14 +2,14 @@ package myproject.model;
 
 public class CarGenerator implements Agent {
 	private LongRoad longRoad;
-	private Model2 model;
+	private Model model;
 	private double carVelocity;
 	private double carLength;
 	private double stopDistance;
 	private double brakeDistance;
 	private double entryRate;
 
-	CarGenerator(LongRoad longRoad, Model2 model, double carVelocity, double carLength, double brakeDistance,
+	CarGenerator(LongRoad longRoad, Model model, double carVelocity, double carLength, double brakeDistance,
 			double stopDistance, double entryRate) {
 		this.longRoad = longRoad;
 		this.model = model;

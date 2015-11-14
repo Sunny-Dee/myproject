@@ -6,6 +6,9 @@ import java.awt.Color;
  * A light has a boolean state.
  */
 public class Light implements Agent {
+	private static final int GREENSTATE = 0; 
+	private static final int YELLOWSTATE = 1; 
+	
 	public boolean isNull = false;
 	private double greenDurationNS; // Duration of the North/South green phase
 									// (in seconds)
@@ -25,16 +28,11 @@ public class Light implements Agent {
 		this.greenDurationNS = greenDurationNS;
 		this.yellowDurationNS = yellowDurationNS;
 		this.dimension = dimension;
-
 		greenDurationEW = 50.0;
 		yellowDurationEW = 30.0;
 
 		setColor();
-	} // Created only by this package. Default values. I changed it to public
-
-	// public boolean getState() {
-	// return tempstate;
-	// }
+	} 
 
 	public int getState() {
 		return state;
@@ -49,10 +47,10 @@ public class Light implements Agent {
 	}
 
 	private void setColor() {
-		if (state == 0) {
+		if (state == GREENSTATE) {
 			color = Color.GREEN;
 			duration = greenDurationNS;
-		} else if (state == 1) {
+		} else if (state == YELLOWSTATE) {
 			color = Color.YELLOW;
 			duration = yellowDurationNS;
 		} else {

@@ -29,9 +29,9 @@ public class Car implements Agent {
 	private int index;
 	private boolean sunk = false;
 	private double distanceToNextCar = 10000000; // something really high before I figure more cars
-	private Model2 model;
+	private Model model;
 
-	public Car(LongRoad longRoad, Model2 model, double maxVelocity, double carLength, double brakeDistance,
+	public Car(LongRoad longRoad, Model model, double maxVelocity, double carLength, double brakeDistance,
 			double stopDistance) {
 		this.carLength = carLength;
 		this.maxVelocity = maxVelocity;

@@ -6,7 +6,7 @@ import java.util.Observable;
 
 import myproject.util.Animator;
 
-public class Model2 extends Observable {
+public class Model extends Observable {
 	private List<Agent> agents;
 	private Animator animator;
 	private boolean disposed;
@@ -16,7 +16,7 @@ public class Model2 extends Observable {
 	private int columns;
 	private boolean simple;
 
-	public Model2(AnimatorBuilder builder, TrafficBuilder t) {
+	public Model(AnimatorBuilder builder, TrafficBuilder t) {
 		this.t = t;
 		rows = t.rows();
 		columns = t.columns();
