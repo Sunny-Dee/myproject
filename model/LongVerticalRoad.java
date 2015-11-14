@@ -7,28 +7,26 @@ import java.util.ListIterator;
 public class LongVerticalRoad extends LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
 	public boolean northSouth;
-	
-	public LongVerticalRoad(boolean orientationNS){
+
+	public LongVerticalRoad(boolean orientationNS) {
 		northSouth = orientationNS;
 	};
-	
-	
-	public boolean isDirectionNSWE(){
+
+	public boolean isDirectionNSWE() {
 		return northSouth;
 	}
-	
-	
-//	public Road nextRoad(){
-//		return roads.iterator().next();
-//	}
-	
-	//I believe this generates duplicates
-	public void reverseRoads(){
+
+	// public Road nextRoad(){
+	// return roads.iterator().next();
+	// }
+
+	// I believe this generates duplicates
+	public void reverseRoads() {
 		ListIterator<Road> ri = roads.listIterator(roads.size());
 		List<Road> tempList = new ArrayList<Road>();
-		while (ri.hasPrevious()){
+		while (ri.hasPrevious()) {
 			tempList.add(ri.previous());
-			
+
 		}
 		roads = tempList;
 	}

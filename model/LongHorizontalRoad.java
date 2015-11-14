@@ -8,32 +8,28 @@ public class LongHorizontalRoad extends LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
 	public boolean eastWest;
 
-	
-	public LongHorizontalRoad(boolean orientationEW){
+	public LongHorizontalRoad(boolean orientationEW) {
 		eastWest = orientationEW;
 	};
-	
-	
-	public boolean isDirectionNSWE(){
+
+	public boolean isDirectionNSWE() {
 		return eastWest;
 	}
-	
-	
-//	public Road nextRoad(){
-//		return roads.iterator().next();
-//	}
-	
-	
-//	public void reverseRoads(){
-//		ListIterator<Road> ri = roads.listIterator();
-//		List<Road> tempList = new ArrayList<Road>();
-//		while (ri.hasPrevious()){
-//			tempList.add(ri.previous());
-//		}
-//		roads = tempList;
-//	}
-	
-	public List<Road> getRoads(){
+
+	// public Road nextRoad(){
+	// return roads.iterator().next();
+	// }
+
+	// public void reverseRoads(){
+	// ListIterator<Road> ri = roads.listIterator();
+	// List<Road> tempList = new ArrayList<Road>();
+	// while (ri.hasPrevious()){
+	// tempList.add(ri.previous());
+	// }
+	// roads = tempList;
+	// }
+
+	public List<Road> getRoads() {
 		List<Road> result = new ArrayList<Road>();
 		for (Road r : roads)
 			result.add(r);

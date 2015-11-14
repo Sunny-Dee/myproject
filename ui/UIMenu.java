@@ -21,15 +21,19 @@ public final class UIMenu {
 		this.heading = heading;
 		this.menu = menu;
 	}
+
 	public int size() {
 		return menu.length;
 	}
+
 	public String getHeading() {
 		return heading;
 	}
+
 	public String getPrompt(int i) {
 		return menu[i].prompt;
 	}
+
 	public void runAction(int i) {
 		menu[i].action.run();
 	}

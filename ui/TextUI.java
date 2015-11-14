@@ -58,10 +58,10 @@ public final class TextUI implements UI {
 
 	public String[] processForm(UIForm form) {
 		// Code from hmk3 may contain bugs
-		String[] result = new String [form.size()];
+		String[] result = new String[form.size()];
 		out.flush();
-		int i=0;
-		while (i<form.size()) {
+		int i = 0;
+		while (i < form.size()) {
 			out.print(form.getPrompt(i) + ": ");
 			out.flush();
 			String response = getResponse();

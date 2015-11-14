@@ -4,11 +4,11 @@ import javax.swing.JOptionPane;
 
 public final class PopupUI implements UI {
 	public void displayMessage(String message) {
-		JOptionPane.showMessageDialog(null,message);
+		JOptionPane.showMessageDialog(null, message);
 	}
 
 	public void displayError(String message) {
-		JOptionPane.showMessageDialog(null,message,"Error",JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	public void processMenu(UIMenu menu) {
@@ -40,10 +40,10 @@ public final class PopupUI implements UI {
 	}
 
 	public String[] processForm(UIForm form) {
-		//This is a copy from hmk 3. May contain some bugs. 
-		String[] result = new String [form.size()];
-		int i=0;
-		while (i<form.size()) {
+		// This is a copy from hmk 3. May contain some bugs.
+		String[] result = new String[form.size()];
+		int i = 0;
+		while (i < form.size()) {
 			String response = JOptionPane.showInputDialog(form.getPrompt(i));
 			if (response == null) {
 				response = "";

@@ -5,11 +5,13 @@ import java.util.List;
 
 public class UIMenuBuilder {
 	private final List<UIMenu.Pair> menu = new ArrayList<UIMenu.Pair>();
+
 	public void add(String prompt, UIMenuAction action) {
 		if (null == action)
 			throw new IllegalArgumentException();
 		menu.add(new UIMenu.Pair(prompt, action));
 	}
+
 	public UIMenu toUIMenu(String heading) {
 		if (null == heading)
 			throw new IllegalArgumentException();

@@ -1,168 +1,211 @@
 package myproject.model;
 //import java.util.concurrent.ThreadLocalRandom;
 
-public class TrafficBuilder { 
+public class TrafficBuilder {
 	private AnimatorBuilder builder;
 	private Model2 model;
-	
-//	Simulation time step (seconds) [0.1]
+
+	// Simulation time step (seconds) [0.1]
 	private double timeStep = 0.1;
-	
-//			Simulation run time (seconds) [1000]
+
+	// Simulation run time (seconds) [1000]
 	private double time = 1000;
-	
-//			Grid size (number of roads) [row = 2, column 3 
+
+	// Grid size (number of roads) [row = 2, column 3
 	private int rows = 2;
 	private int columns = 3;
-	
-//			Traffic pattern [simple]
+
+	// Traffic pattern [simple]
 	private int pattern = 2;
-	
-//			Car entry rate (seconds/car) [min = 1.0, max = 2.5]
-	private double entryRate = 1.0; //ThreadLocalRandom.current().nextDouble(1.0, 2.5 + 1) ; 
-	
-//			Road segment length (meters) [min = 10.0, max = 15.0]
-	private double roadSegmentLength = 20; 
-	
-//			Intersection length (meters) [min = 10.0, max  = 15.0]
+
+	// Car entry rate (seconds/car) [min = 1.0, max = 2.5]
+	private double entryRate = 1.0; // ThreadLocalRandom.current().nextDouble(1.0,
+									// 2.5 + 1) ;
+
+	// Road segment length (meters) [min = 10.0, max = 15.0]
+	private double roadSegmentLength = 20;
+
+	// Intersection length (meters) [min = 10.0, max = 15.0]
 	private double intersectionLength = 10;
-	
-//			Car length (meters) [min = 10.0, max  = 15.0]
+
+	// Car length (meters) [min = 10.0, max = 15.0]
 	private double carLength = 10;
-	
-//			Car maximum velocity (meters/second) [min = 1.0, max = 3.0]  
+
+	// Car maximum velocity (meters/second) [min = 1.0, max = 3.0]
 	private double minVelocity = 1.0;
 	private double maxVelocity = 3.0;
-	
-//			Car stop distance (meters) [min = 0.5, max = 5.0]
+
+	// Car stop distance (meters) [min = 0.5, max = 5.0]
 	private double stopDistance = 1.0;
-	
-	//[min = 9.0, max = 10.0]
-	private double breakDistance = 9.0; 
-	
-//			Traffic light green time (seconds) [min = 30.0, max = 180.0]
+
+	// [min = 9.0, max = 10.0]
+	private double breakDistance = 9.0;
+
+	// Traffic light green time (seconds) [min = 30.0, max = 180.0]
 	private double greenLightTime = 50.0;
-	
-//			Traffic light yellow time (seconds) [min = 32.0, max = 40.0]
+
+	// Traffic light yellow time (seconds) [min = 32.0, max = 40.0]
 	private double yellowLightTime = 30.0;
-	
-	public TrafficBuilder(AnimatorBuilder builder){
+
+	public TrafficBuilder(AnimatorBuilder builder) {
 		this.builder = builder;
 		model = new Model2(builder, this);
 	};
-	
-	
-	public void setTimeStep(double newtime){ timeStep = newtime;}
-	public double timeStep() { return timeStep;}
-	
-	public void settime(double newtime){ time = newtime;}
-	public double time() { return time;}
-	
-	public void setGrid(int newRows, int newColumns){
+
+	public void setTimeStep(double newtime) {
+		timeStep = newtime;
+	}
+
+	public double timeStep() {
+		return timeStep;
+	}
+
+	public void settime(double newtime) {
+		time = newtime;
+	}
+
+	public double time() {
+		return time;
+	}
+
+	public void setGrid(int newRows, int newColumns) {
 		rows = newRows;
 		columns = newColumns;
 	}
-	public int rows() { return rows;}
-	public int columns() { return columns;}
-	
-	public boolean setPattern(int patternChoice){ //consider design for this one
-		if (patternChoice < 1 || patternChoice > 2)
-//			throw new IllegalArgumentException();
-			return false;
-		pattern = patternChoice;
-		return true; //if setPattern == false, ask again. 
+
+	public int rows() {
+		return rows;
 	}
 
-	public String patternToString(){
+	public int columns() {
+		return columns;
+	}
+
+	public boolean setPattern(int patternChoice) { // consider design for this
+													// one
+		if (patternChoice < 1 || patternChoice > 2)
+			// throw new IllegalArgumentException();
+			return false;
+		pattern = patternChoice;
+		return true; // if setPattern == false, ask again.
+	}
+
+	public String patternToString() {
 		if (pattern == 1)
 			return "[simple]";
 		else
 			return "[alternating]";
 	}
-	public boolean pattern() { 
+
+	public boolean pattern() {
 		return pattern == 1;
 	}
-	
-	public boolean setEntryRate(double newEntryRate){
+
+	public boolean setEntryRate(double newEntryRate) {
 		if (newEntryRate < 1.0 || newEntryRate > 2.5)
 			return false;
 		entryRate = newEntryRate;
 		return true;
 	}
-	public double entryRate() { return entryRate;}
-	
-	public boolean setRoadSegmentLength(double newLength){
+
+	public double entryRate() {
+		return entryRate;
+	}
+
+	public boolean setRoadSegmentLength(double newLength) {
 		if (newLength < 10.0 || newLength > 15.0)
 			return false;
 		roadSegmentLength = newLength;
 		return true;
 	}
-	public double roadSegmentLen() { return roadSegmentLength*10;}
-	
-	public boolean setIntersectionLength(double newLength){
+
+	public double roadSegmentLen() {
+		return roadSegmentLength * 10;
+	}
+
+	public boolean setIntersectionLength(double newLength) {
 		if (newLength < 10.0 || newLength > 20.0)
 			return false;
 		intersectionLength = newLength;
 		return true;
 	}
-	public double intersectionLen() { return intersectionLength;}
-	
-	public boolean setCarLength(double newCarLength){
+
+	public double intersectionLen() {
+		return intersectionLength;
+	}
+
+	public boolean setCarLength(double newCarLength) {
 		if (newCarLength < 10.0 || newCarLength > 15.0)
 			return false;
 		carLength = newCarLength;
 		return true;
 	}
-	public double carLen() { return carLength;}
-	
-	public boolean setMaxVelocity(double newMax){
+
+	public double carLen() {
+		return carLength;
+	}
+
+	public boolean setMaxVelocity(double newMax) {
 		if (newMax < 10.0 || newMax > 15.0)
 			return false;
 		maxVelocity = newMax;
 		return true;
 	}
-	public double maxVel() { return maxVelocity;}
-	
-	public boolean setStopDistance(double newStopDist){
+
+	public double maxVel() {
+		return maxVelocity;
+	}
+
+	public boolean setStopDistance(double newStopDist) {
 		if (newStopDist < 0.5 || newStopDist > 5.0)
 			return false;
 		stopDistance = newStopDist;
 		return true;
 	}
-	public double stopDist() { return stopDistance;}
-	
-	public boolean setBreakDistance(double newBreakDist){
+
+	public double stopDist() {
+		return stopDistance;
+	}
+
+	public boolean setBreakDistance(double newBreakDist) {
 		if (newBreakDist < 9.0 || newBreakDist > 10.0)
 			return false;
 		breakDistance = newBreakDist;
 		return true;
 	}
-	public double breakDist() { return breakDistance;}
-	
-	
-	public boolean setGreenLight(double greenTime){
+
+	public double breakDist() {
+		return breakDistance;
+	}
+
+	public boolean setGreenLight(double greenTime) {
 		if (greenTime < 30.0 || greenTime > 180.0)
 			return false;
 		greenLightTime = greenTime;
 		return true;
 	}
-	public double greenLightTime() { return greenLightTime;}
-	
-	public boolean setYellowLight(double yellowTime){
+
+	public double greenLightTime() {
+		return greenLightTime;
+	}
+
+	public boolean setYellowLight(double yellowTime) {
 		if (yellowTime < 32.0 || yellowTime > 40.0)
 			return false;
 		yellowLightTime = yellowTime;
 		return true;
 	}
-	public double yellowLightTime() { return yellowLightTime;}
-	
-	
-	public void runModel(){
+
+	public double yellowLightTime() {
+		return yellowLightTime;
+	}
+
+	public void runModel() {
 		model.run(time);
 		model.dispose();
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		StringBuilder str = new StringBuilder("");
 		str.append("1. Simulation time step (seconds) [" + timeStep + "] \n");
 		str.append("2. Simulation run time (seconds) [" + time + "] \n");
@@ -177,8 +220,8 @@ public class TrafficBuilder {
 		str.append("11. Car break distance (meters) [min = 9.0, max = 10.0]\n");
 		str.append("12. Traffic light green time (seconds) [min = 30.0, max = 180.0]\n");
 		str.append("13. Traffic light yellow time (seconds) [min = 32.0, max = 40.0]\n");
-		
+
 		return str.toString();
 	}
-	
+
 }

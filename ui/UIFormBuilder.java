@@ -5,9 +5,11 @@ import java.util.List;
 
 public final class UIFormBuilder {
 	private final List<UIForm.Pair> menu = new ArrayList<UIForm.Pair>();
+
 	public void add(String prompt, UIFormTest test) {
 		menu.add(new UIForm.Pair(prompt, test));
 	}
+
 	public UIForm toUIForm(String heading) {
 		if (null == heading)
 			throw new IllegalArgumentException();

@@ -21,15 +21,19 @@ public final class UIForm {
 		this.heading = heading;
 		this.form = menu;
 	}
+
 	public int size() {
 		return form.length;
 	}
+
 	public String getHeading() {
 		return heading;
 	}
+
 	public String getPrompt(int i) {
 		return form[i].prompt;
 	}
+
 	public boolean checkInput(int i, String input) {
 		if (null == form[i])
 			return true;

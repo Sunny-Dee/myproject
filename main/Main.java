@@ -6,7 +6,7 @@ import myproject.model.text.TextAnimatorBuilder;
 import myproject.ui.UI;
 
 public class Main {
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		UI ui = null;
 		AnimatorBuilder builder = null;
 
@@ -22,7 +22,7 @@ public class Main {
 		} else {
 			if (Math.random() <= 0.5) {
 				ui = new myproject.ui.TextUI();
-				builder = new TextAnimatorBuilder(); 
+				builder = new TextAnimatorBuilder();
 			} else {
 				ui = new myproject.ui.PopupUI();
 				builder = new SwingAnimatorBuilder();

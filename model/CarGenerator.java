@@ -7,21 +7,22 @@ public class CarGenerator implements Agent {
 	private double carLength;
 	private double stopDistance;
 	private double brakeDistance;
-	
-	CarGenerator (LongRoad longRoad, Model2 model, double carVelocity, double carLength,
-			     double brakeDistance, double stopDistance){
+
+	CarGenerator(LongRoad longRoad, Model2 model, double carVelocity, double carLength, double brakeDistance,
+			double stopDistance) {
 		this.longRoad = longRoad;
 		this.model = model;
 		this.carVelocity = carVelocity;
 		this.carLength = carLength;
 		this.brakeDistance = brakeDistance;
 		this.stopDistance = stopDistance;
-		
+
 	}
+
 	@Override
 	public void run(double time) {
 		// TODO Auto-generated method stub
-		if (time % 7 == 0){
+		if (time % 7 == 0) {
 			Car car = new Car(longRoad, model, carVelocity, carLength, brakeDistance, stopDistance);
 			model.addAgent(car);
 		}
