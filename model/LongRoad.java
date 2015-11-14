@@ -6,12 +6,14 @@ import java.util.List;
 
 import myproject.model.Road;
 
-public abstract class LongRoad {
+public class LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
 	Agent[][] intersections;
 	public boolean oppositeDirection;
 
-	LongRoad() {};
+	LongRoad(boolean oppositeDirection) {
+		this.oppositeDirection = oppositeDirection;
+	};
 
 	public void addRoad(Road r) {
 		roads.add(r);
@@ -34,5 +36,8 @@ public abstract class LongRoad {
 		return roads.size();
 	}
 
-	public abstract boolean isDirectionNSWE();
+	public boolean oppositeDirection(){
+		return oppositeDirection;
+	}
+		
 }

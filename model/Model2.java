@@ -91,7 +91,7 @@ public class Model2 extends Observable {
 		// Add Horizontal Roads
 		boolean eastToWest = false;
 		for (int i = 0; i < rows; i++) {
-			LongHorizontalRoad temproad = new LongHorizontalRoad(eastToWest);
+			LongRoad temproad = new LongRoad(eastToWest);
 			if (eastToWest) { // if true, pattern is alternating.
 				for (int j = columns; j >= 0; j--) {
 					Road l = new Road(t.roadSegmentLen(), true);
@@ -142,7 +142,7 @@ public class Model2 extends Observable {
 		// Add Vertical Roads
 		boolean southToNorth = false;
 		for (int j = 0; j < columns; j++) {
-			LongVerticalRoad temproad2 = new LongVerticalRoad(southToNorth);
+			LongRoad temproad2 = new LongRoad(southToNorth);
 			if (southToNorth) {
 				for (int i = rows; i >= 0; i--) {
 					Road l = new Road(t.roadSegmentLen(), false);
