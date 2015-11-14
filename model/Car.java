@@ -28,8 +28,7 @@ public class Car implements Agent {
 	private LongRoad longRoad;
 	private int index;
 	private boolean sunk = false;
-	private double distanceToNextCar = 10000000; // something really high before
-													// more cars come along
+	private double distanceToNextCar = 10000000; // something really high before I figure more cars
 	private Model2 model;
 
 	public Car(LongRoad longRoad, Model2 model, double maxVelocity, double carLength, double brakeDistance,
@@ -62,9 +61,11 @@ public class Car implements Agent {
 	}
 
 	public void nextRoad() {
-		// currentRoad = longRoad.nextRoad();
+
+//		currentRoad.sinkCar(this);
 		currentRoad = longRoad.nextRoad(Math.min(index++, longRoad.getRoadNum() - 1));
-		// currentRoad.sinkCar (this);
+//		currentRoad.accept(this);
+
 
 		// if (index > longRoad.getRoadNum()-1 || index < 0) {
 		// if (currentRoad.intersection.isNull()) {
@@ -75,6 +76,13 @@ public class Car implements Agent {
 		// }
 		//
 		segmentPosition = 0;
+	}
+	
+	public double distanceToObstacle(){
+		double carToIntersection = currentRoad.getRoadLength() - segmentPosition - carLength;
+		double carToCar = currentRoad.carInFront(this) - position - carLength;
+		return Math.min(carToIntersection, carToCar);
+		
 	}
 
 	public void setDistanceToObstacle(double obstacle) {
@@ -90,7 +98,8 @@ public class Car implements Agent {
 	}
 
 	private double update() {
-		distanceToObstacle = (Math.min(currentRoad.getRoadLength() - segmentPosition - carLength, distanceToNextCar));
+		distanceToObstacle = distanceToObstacle();
+//		distanceToObstacle = (Math.min(currentRoad.getRoadLength() - segmentPosition - carLength, distanceToNextCar));
 
 //		double velocity = (maxVelocity / (brakeDistance - stopDistance)) * (distanceToObstacle - stopDistance);
 //
@@ -127,6 +136,7 @@ public class Car implements Agent {
 			if (currentRoad.intersection.isNull()) {
 				currentRoad.sinkCar(this);
 				position += 100000;
+				model.removeAgent(this);
 				sunk = true;
 			} 
 			

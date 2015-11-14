@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * A road holds cars.
  */
 public class Road {
+	private static final double OUTOFDISTANCE = 10000000;
 	private double roadLength;
 	private static int roadTracker = 0;
 	private int roadID;
@@ -49,6 +50,18 @@ public class Road {
 
 	public List<Car> getCars() {
 		return cars;
+	}
+	
+	public Car getCar(int index){
+		return cars.get(index);
+	}
+	
+	public double carInFront(Car car){
+		int index = cars.indexOf(car) - 1;
+		if (index >= 0)
+			return cars.get(index).getPosition();
+		else
+			return OUTOFDISTANCE;   
 	}
 
 	public void setIntersection(Agent newIntersection) {

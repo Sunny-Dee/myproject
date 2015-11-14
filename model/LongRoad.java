@@ -9,7 +9,7 @@ import myproject.model.Road;
 public abstract class LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
 	Agent[][] intersections;
-//	public boolean oppositeDirection;
+	public boolean oppositeDirection;
 
 	LongRoad() {};
 

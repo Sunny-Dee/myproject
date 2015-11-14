@@ -108,7 +108,7 @@ public class Model2 extends Observable {
 					temproad.addRoad(l);
 
 				}
-//				Car car = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.breakDist());
+//				Car cars = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
 				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.carLen(), t.breakDist(),
 						t.stopDist(), t.entryRate());
 				
@@ -128,9 +128,9 @@ public class Model2 extends Observable {
 					temproad.addRoad(l);
 
 				}
-//				Car car = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
-				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.carLen(), t.breakDist(),
-						t.stopDist(), t.entryRate());
+				Car cars = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
+//				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.carLen(), t.breakDist(),
+//						t.stopDist(), t.entryRate());
 				
 				agents.add(cars);
 			}
@@ -156,10 +156,10 @@ public class Model2 extends Observable {
 					builder.addVerticalRoad(l, i, j, southToNorth);
 					temproad2.addRoad(l);
 				}
-//				Car car = new Car(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
+				Car cars = new Car(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
 				
-				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(),
-						t.stopDist(), t.entryRate());
+//				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(),
+//						t.stopDist(), t.entryRate());
 				agents.add(cars);
 			} else {
 				for (int i = 0; i <= rows; i++) {
@@ -171,10 +171,10 @@ public class Model2 extends Observable {
 					builder.addVerticalRoad(l, i, j, southToNorth);
 					temproad2.addRoad(l);
 				}
-//				Car car = new Car(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
+				Car cars = new Car(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
 				
-				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(),
-						t.stopDist(), t.entryRate());
+//				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(),
+//						t.stopDist(), t.entryRate());
 				agents.add(cars);
 			}
 			if (!simple) {
