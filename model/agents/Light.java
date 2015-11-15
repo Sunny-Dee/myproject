@@ -1,4 +1,4 @@
-package myproject.model;
+package myproject.model.agents;
 
 import java.awt.Color;
 

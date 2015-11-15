@@ -1,4 +1,8 @@
-package myproject.model;
+package myproject.model.agents;
+
+import myproject.model.Model;
+import myproject.model.roads.LongRoad;
+import myproject.model.roads.Road;
 
 /**
  * A car remembers its position from the beginning of its road. Cars have random

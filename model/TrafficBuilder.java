@@ -49,7 +49,7 @@ public class TrafficBuilder {
 
 	public TrafficBuilder(AnimatorBuilder builder) {
 		this.builder = builder;
-		model = new Model(builder, this);
+		
 	};
 
 	public void setTimeStep(double newtime) {
@@ -201,6 +201,7 @@ public class TrafficBuilder {
 	}
 
 	public void runModel() {
+		model = new Model(builder, this);
 		model.run(time);
 		model.dispose();
 	}

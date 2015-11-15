@@ -1,4 +1,7 @@
-package myproject.model;
+package myproject.model.agents;
+
+import myproject.model.Model;
+import myproject.model.roads.LongRoad;
 
 public class CarGenerator implements Agent {
 	private LongRoad longRoad;
@@ -9,7 +12,7 @@ public class CarGenerator implements Agent {
 	private double brakeDistance;
 	private double entryRate;
 
-	CarGenerator(LongRoad longRoad, Model model, double carVelocity, double carLength, double brakeDistance,
+	public CarGenerator(LongRoad longRoad, Model model, double carVelocity, double carLength, double brakeDistance,
 			double stopDistance, double entryRate) {
 		this.longRoad = longRoad;
 		this.model = model;

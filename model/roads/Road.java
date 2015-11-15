@@ -1,6 +1,10 @@
-package myproject.model;
+package myproject.model.roads;
 
 import java.util.List;
+
+import myproject.model.agents.Agent;
+import myproject.model.agents.Car;
+
 import java.util.ArrayList;
 
 /**

@@ -1,4 +1,4 @@
-package myproject.model;
+package myproject.model.agents;
 
 public class NullIntersection implements Agent {
 	public boolean isNull() {

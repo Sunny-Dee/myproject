@@ -1,6 +1,5 @@
 package myproject.model.swing;
 
-import myproject.model.MP;
 
 /**
  * Static class for visualization parameters.
@@ -8,7 +7,8 @@ import myproject.model.MP;
 class VP {
 	private VP() {}
 	/** Width of model elements, in meters */
-	static double elementWidth = MP.carLength;
+	public static double carLength = 10;
+	static double elementWidth = carLength;
 	/** Gap between model elements, in meters */
 	static double gap = 1;
 	/** Width of the displayed graphics window, in pixels */

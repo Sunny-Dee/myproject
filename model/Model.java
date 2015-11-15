@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import myproject.model.agents.Agent;
+import myproject.model.agents.Car;
+import myproject.model.agents.CarGenerator;
+import myproject.model.agents.Intersection;
+import myproject.model.agents.Light;
+import myproject.model.agents.NullIntersection;
+import myproject.model.roads.LongRoad;
+import myproject.model.roads.Road;
 import myproject.util.Animator;
 
 public class Model extends Observable {
@@ -32,6 +40,7 @@ public class Model extends Observable {
 		this.animator = builder.getAnimator();
 		super.addObserver(animator);
 		simple = t.pattern();
+		
 	}
 
 	public void run(double duration) {
@@ -61,7 +70,7 @@ public class Model extends Observable {
 		agents.add(a);
 	}
 
-	protected void removeAgent(Agent a) {
+	public void removeAgent(Agent a) {
 		agents.remove(a);
 	}
 
@@ -76,8 +85,8 @@ public class Model extends Observable {
 		for (int i = 0; i <= rows; i++) {
 			for (int j = 0; j <= columns; j++) {
 
-				intersections[i][j] = new Intersection(new Light((int) (Math.random() * 10) % 3, t.intersectionLen(),
-						t.greenLightTime(), t.yellowLightTime()));
+				intersections[i][j] = new Intersection(this, new Light((int) (Math.random() * 10) % 3, t.intersectionLen(),
+						t.greenLightTime(), t.yellowLightTime()), t.intersectionLen());
 			}
 		}
 
@@ -181,7 +190,11 @@ public class Model extends Observable {
 				southToNorth = !southToNorth;
 			}
 		}
-
+		
+	}
+	
+	public double roadLen ( ){
+		return t.roadSegmentLen();
 	}
 
 }

@@ -20,12 +20,12 @@ public class Main {
 				System.exit(1);
 			}
 		} else {
-			if (Math.random() <= 0.5) {
+			if (Math.random() <= 0.9) {
+				ui = new myproject.ui.PopupUI();
+				builder = new SwingAnimatorBuilder();	
+			} else {
 				ui = new myproject.ui.TextUI();
 				builder = new TextAnimatorBuilder();
-			} else {
-				ui = new myproject.ui.PopupUI();
-				builder = new SwingAnimatorBuilder();
 			}
 		}
 		Controls control = new Controls(builder, ui);

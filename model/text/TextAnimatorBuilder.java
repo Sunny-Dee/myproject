@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import myproject.model.Agent;
 import myproject.model.AnimatorBuilder;
-import myproject.model.Car;
-import myproject.model.Road;
+import myproject.model.agents.Agent;
+import myproject.model.agents.Car;
+import myproject.model.roads.Road;
 import myproject.util.Animator;
 
 /**

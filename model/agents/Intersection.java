@@ -1,12 +1,16 @@
-package myproject.model;
+package myproject.model.agents;
+
+import myproject.model.Model;
 
 public class Intersection implements Agent {
 	private Light light;
 	private double intersectionLength;
+	private Model model;
 
-	public Intersection(Light light) {
+	public Intersection(Model model, Light light, double intersectionLength) {
+		this.model = model;
 		this.light = light;
-		intersectionLength = 10; // Hard coding this for now, change it later
+		this.intersectionLength = intersectionLength; // Hard coding this for now, change it later
 	}
 
 	public java.awt.Color getColor() {
@@ -23,6 +27,10 @@ public class Intersection implements Agent {
 
 	public double getDimension() {
 		return intersectionLength;
+	}
+	
+	public double getRoadLength(){
+		return model.roadLen();
 	}
 
 	public void run(double time) {

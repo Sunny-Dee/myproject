@@ -1,4 +1,4 @@
-package myproject.model;
+package myproject.model.agents;
 
 import org.junit.Test;
 

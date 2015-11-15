@@ -5,12 +5,12 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-import myproject.model.Agent;
 import myproject.model.AnimatorBuilder;
-import myproject.model.Car;
-import myproject.model.Intersection;
-import myproject.model.MP;
-import myproject.model.Road;
+//import myproject.model.MP;
+import myproject.model.agents.Agent;
+import myproject.model.agents.Car;
+import myproject.model.agents.Intersection;
+import myproject.model.roads.Road;
 import myproject.util.Animator;
 import myproject.util.SwingAnimator;
 import myproject.util.SwingAnimatorPainter;
@@ -31,12 +31,14 @@ public class SwingAnimatorBuilder implements AnimatorBuilder {
 		return returnValue;
 	}
 	private static double skipInit = VP.gap;
-	private static double skipRoad = VP.gap + MP.roadLength;
+//	private static double skipRoad = VP.gap + MP.roadLength;
 	private static double skipCar = VP.gap + VP.elementWidth;
-	private static double skipRoadCar = skipRoad + skipCar;
+//	private static double skipRoadCar = skipRoad + skipCar;
 	public void addLight(Agent d, int i, int j) {
-		double x = skipInit + skipRoad + j*skipRoadCar;
-		double y = skipInit + skipRoad + i*skipRoadCar;
+		double x = skipInit + (VP.gap + ((Intersection) d).getRoadLength()) + 
+				   j*((VP.gap + ((Intersection) d).getRoadLength()) + skipCar);
+		double y = skipInit + (VP.gap + ((Intersection) d).getRoadLength())  + 
+				i*((VP.gap + ((Intersection) d).getRoadLength()) + skipCar);
 		Translator t = new TranslatorWE(x, y, d.getDimension(), d.getDimension(), VP.scaleFactor);
 		painter.addLight(d,t);
 	}

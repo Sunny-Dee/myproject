@@ -1,17 +1,14 @@
-package myproject.model;
+package myproject.model.roads;
 
 import java.util.ArrayList;
-//import java.util.Iterator;
 import java.util.List;
 
-import myproject.model.Road;
 
 public class LongRoad {
 	private List<Road> roads = new ArrayList<Road>();
-	Agent[][] intersections;
 	public boolean oppositeDirection;
 
-	LongRoad(boolean oppositeDirection) {
+	public LongRoad(boolean oppositeDirection) {
 		this.oppositeDirection = oppositeDirection;
 	};
 

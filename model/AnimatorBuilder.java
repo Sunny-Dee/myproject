@@ -1,5 +1,8 @@
 package myproject.model;
 
+import myproject.model.agents.Agent;
+import myproject.model.agents.Light;
+import myproject.model.roads.Road;
 import myproject.util.Animator;
 
 /**
