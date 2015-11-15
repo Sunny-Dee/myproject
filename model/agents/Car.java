@@ -15,6 +15,7 @@ public class Car implements Agent {
 	public double carLength;
 	private double position;
 	private double segmentPosition;
+	private static final double OUTOFDISTANCE = 10000000;
 	private java.awt.Color color = new java.awt.Color((int) Math.ceil(Math.random() * 255),
 			(int) Math.ceil(Math.random() * 255), (int) Math.ceil(Math.random() * 255));
 	private double maxVelocity = 3.0; // The maximum velocity of the car (in
@@ -34,6 +35,7 @@ public class Car implements Agent {
 	private boolean sunk = false;
 	private double distanceToNextCar = 10000000; // something really high before I figure more cars
 	private Model model;
+	private Car carAhead;
 
 	public Car(LongRoad longRoad, Model model, double maxVelocity, double carLength, double brakeDistance,
 			double stopDistance) {
@@ -46,6 +48,7 @@ public class Car implements Agent {
 		this.longRoad = longRoad;
 		currentRoad = longRoad.nextRoad(index++);
 		currentRoad.accept(this);
+		carAhead = currentRoad.carInFront(this);
 	}
 
 	public double getPosition() {
@@ -69,28 +72,20 @@ public class Car implements Agent {
 //		currentRoad.sinkCar(this);
 		currentRoad = longRoad.nextRoad(Math.min(index++, longRoad.getRoadNum() - 1));
 //		currentRoad.accept(this);
-
-
-		// if (index > longRoad.getRoadNum()-1 || index < 0) {
-		// if (currentRoad.intersection.isNull()) {
-		// model.removeAgent(this);
-		// }
-		// else {
-		// currentRoad.accept(this);
-		// }
-		//
 		segmentPosition = 0;
 	}
 	
 	public double distanceToObstacle(){
+		double carToCar;
+		if (carAhead == null)
+			carToCar = OUTOFDISTANCE;
+		else
+			carToCar = carAhead.getPosition() - position - carLength;
+		
 		double carToIntersection = currentRoad.getRoadLength() - segmentPosition - carLength;
-		double carToCar = currentRoad.carInFront(this) - position - carLength;
+		
 		return Math.min(carToIntersection, carToCar);
 		
-	}
-
-	public void setDistanceToObstacle(double obstacle) {
-		distanceToObstacle = obstacle - position - carLength;
 	}
 
 	public java.awt.Color getColor() {

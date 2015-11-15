@@ -3,7 +3,9 @@ package myproject.model.agents;
 import java.awt.Color;
 
 /**
- * A light has a boolean state.
+ * A light is held within an intersection and changes its state based on the time it's been running.
+ * The interpretation of each state is left to the objects observing it. 
+ * Users can change the duration on the lights when creating it. 
  */
 public class Light implements Agent {
 	private static final int GREENSTATE = 0; 

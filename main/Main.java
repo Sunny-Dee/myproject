@@ -4,30 +4,24 @@ import myproject.model.AnimatorBuilder;
 import myproject.model.swing.SwingAnimatorBuilder;
 import myproject.model.text.TextAnimatorBuilder;
 import myproject.ui.UI;
+import myproject.ui.UIFactory;
 
 public class Main {
 	public static void main(String[] args) {
+		UIFactory factory = new UIFactory();
 		UI ui = null;
 		AnimatorBuilder builder = null;
 
-		if (args.length > 0) {
-			if ("GUI".equalsIgnoreCase(args[0])) {
-				ui = new myproject.ui.PopupUI();
-			} else if ("TEXT".equalsIgnoreCase(args[0])) {
-				ui = new myproject.ui.TextUI();
-			} else {
-				System.out.println("Argument must be GUI or TEXT");
-				System.exit(1);
-			}
+		if (Math.random() <= 0.9) {
+//			ui = new myproject.ui.PopupUI();
+			ui = UIFactory.popUI();
+			builder = new SwingAnimatorBuilder();	
 		} else {
-			if (Math.random() <= 0.9) {
-				ui = new myproject.ui.PopupUI();
-				builder = new SwingAnimatorBuilder();	
-			} else {
-				ui = new myproject.ui.TextUI();
-				builder = new TextAnimatorBuilder();
-			}
+//			ui = new myproject.ui.TextUI();
+			ui = UIFactory.textUI();
+			builder = new TextAnimatorBuilder();
 		}
+	
 		Controls control = new Controls(builder, ui);
 		control.run();
 	}

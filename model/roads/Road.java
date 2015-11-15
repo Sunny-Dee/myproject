@@ -18,13 +18,6 @@ public class Road {
 	public Agent intersection;
 	public boolean horizontal;
 
-	// public Road(int i, int j, boolean horizontal) {
-	// roadLength = 200;
-	// roadID = ++roadTracker;
-	// this.horizontal = horizontal;
-	// } // Created only by this package. Deliana changed it to public. Change
-	// this later
-
 	public Road(double roadLength, boolean horizontal) {
 		this.roadLength = roadLength;
 		roadID = ++roadTracker;
@@ -60,19 +53,26 @@ public class Road {
 		return cars.get(index);
 	}
 	
-	public double carInFront(Car car){
+//	public double carInFront(Car car){
+//		int index = cars.indexOf(car) - 1;
+//		if (index >= 0)
+//			return cars.get(index).getPosition();
+//		else
+//			return OUTOFDISTANCE;   
+//	}
+	
+	public Car carInFront(Car car){
 		int index = cars.indexOf(car) - 1;
 		if (index >= 0)
-			return cars.get(index).getPosition();
+			return cars.get(index);
 		else
-			return OUTOFDISTANCE;   
+			return null;
 	}
 
 	public void setIntersection(Agent newIntersection) {
 		intersection = newIntersection;
 	}
 
-	// NOT SURE WHAT TO DO IN SPECIAL CASES WHERE INDEX+1 IS OUT OF BOUND.
 	public double distanceToObstacle(Car car) {
 		int index = cars.indexOf(car);
 

@@ -1,13 +1,18 @@
 package myproject.ui;
 
 public class UIFactory {
-	private UIFactory() {
+	public UIFactory() {
 	}
 
-	static private UI UI = new PopupUI();
+	static private UI popUI = new PopupUI();
 
-	// static private UI UI = new TextUI();
-	static public UI ui() {
-		return UI;
+	static private UI textUI = new TextUI();
+	
+	static public UI popUI() {
+		return popUI;
+	}
+	
+	static public UI textUI() {
+		return textUI;
 	}
 }

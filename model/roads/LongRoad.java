@@ -3,13 +3,16 @@ package myproject.model.roads;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * A long road holds road segments and lights. Indicates the car what road next.
+ */
 public class LongRoad {
-	private List<Road> roads = new ArrayList<Road>();
+	private List<Road> roads;
 	public boolean oppositeDirection;
 
 	public LongRoad(boolean oppositeDirection) {
 		this.oppositeDirection = oppositeDirection;
+		roads = new ArrayList<Road>();
 	};
 
 	public void addRoad(Road r) {
@@ -25,9 +28,6 @@ public class LongRoad {
 	// return roadIter.next();
 	// }
 
-	public boolean carCanGo(Road r) {
-		return r.canGo();
-	}
 
 	public int getRoadNum() {
 		return roads.size();

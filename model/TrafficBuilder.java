@@ -1,5 +1,9 @@
 package myproject.model;
-//import java.util.concurrent.ThreadLocalRandom;
+
+/**
+ * Class to hold default values and allow users change the parameters. 
+ * It runs a new model with the indicated parameters. 
+ */
 
 public class TrafficBuilder {
 	private AnimatorBuilder builder;

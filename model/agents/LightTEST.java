@@ -10,7 +10,7 @@ public class LightTEST {
 	Light light = new Light(GREENSTATE, dimension, greenDurationNS,  yellowDurationNS);
 	
 	@Test
-	public void testSize(){
+	public void testStates(){
 		
 	}
 

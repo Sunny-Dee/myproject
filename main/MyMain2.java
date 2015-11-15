@@ -1,7 +1,7 @@
 package myproject.main;
 
 import myproject.model.TrafficBuilder;
-//import myproject.model.swing.SwingAnimatorBuilder;
+import myproject.model.swing.SwingAnimatorBuilder;
 import myproject.model.text.TextAnimatorBuilder;
 
 public class MyMain2 {
@@ -16,11 +16,11 @@ public class MyMain2 {
 		}
 
 
-//		{
-//
-//			TrafficBuilder tb = new TrafficBuilder(new SwingAnimatorBuilder());
-//			tb.runModel();
-//		}
+		{
+
+			TrafficBuilder tb = new TrafficBuilder(new SwingAnimatorBuilder());
+			tb.runModel();
+		}
 
 		System.exit(0);
 	}
