@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * A long road holds road segments and lights. Indicates the car what road next.
  */
+
 public class LongRoad {
 	private List<Road> roads;
 	public boolean oppositeDirection;
@@ -22,12 +23,6 @@ public class LongRoad {
 	public Road nextRoad(int index) {
 		return roads.get(index);
 	}
-
-	// public Road nextRoad(){
-	// Iterator<Road> roadIter = roads.iterator();
-	// return roadIter.next();
-	// }
-
 
 	public int getRoadNum() {
 		return roads.size();

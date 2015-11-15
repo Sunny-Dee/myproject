@@ -33,10 +33,9 @@ public class TrafficBuilder {
 	private double intersectionLength = 10;
 
 	// Car length (meters) [min = 10.0, max = 15.0]
-	private double carLength = 10;
+	private double carLength = 15;
 
 	// Car maximum velocity (meters/second) [min = 1.0, max = 3.0]
-	private double minVelocity = 1.0;
 	private double maxVelocity = 3.0;
 
 	// Car stop distance (meters) [min = 0.5, max = 5.0]

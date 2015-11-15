@@ -6,9 +6,7 @@ import myproject.model.roads.Road;
 
 /**
  * A car remembers its position from the beginning of its road. Cars have random
- * velocity and random movement pattern: when reaching the end of a road, the
- * dot either resets its position to the beginning of the road, or reverses its
- * direction.
+ * velocity and random length within the indicated range. 
  */
 public class Car implements Agent {
 
@@ -18,29 +16,23 @@ public class Car implements Agent {
 	private static final double OUTOFDISTANCE = 10000000;
 	private java.awt.Color color = new java.awt.Color((int) Math.ceil(Math.random() * 255),
 			(int) Math.ceil(Math.random() * 255), (int) Math.ceil(Math.random() * 255));
-	private double maxVelocity = 3.0; // The maximum velocity of the car (in
-										// meters/second)
+	private double maxVelocity; 
 	private double distanceToObstacle;
-	private double brakeDistance; // If distance to nearest obstacle is <=
-									// brakeDistance,
-	// then the car will start to slow down (in meters)
-	private double stopDistance; // If distance to nearest obstacle is ==
-									// stopDistance,
-	// then the car will stop (in meters)
-	private int length; // Length of the car (in meters)
+	private double brakeDistance; 
+	private double stopDistance; 
+	private int length; 
 
 	private Road currentRoad;
 	private LongRoad longRoad;
 	private int index;
 	private boolean sunk = false;
-	private double distanceToNextCar = 10000000; // something really high before I figure more cars
 	private Model model;
 	private Car carAhead;
 
 	public Car(LongRoad longRoad, Model model, double maxVelocity, double carLength, double brakeDistance,
 			double stopDistance) {
-		this.carLength = carLength;
-		this.maxVelocity = maxVelocity;
+		this.carLength = (int) Math.ceil(Math.random() * carLength);
+		this.maxVelocity =  (int) Math.ceil(Math.random() * maxVelocity);
 		this.brakeDistance = brakeDistance;
 		this.stopDistance = stopDistance;
 		this.model = model;
@@ -98,16 +90,6 @@ public class Car implements Agent {
 
 	private double update() {
 		distanceToObstacle = distanceToObstacle();
-//		distanceToObstacle = (Math.min(currentRoad.getRoadLength() - segmentPosition - carLength, distanceToNextCar));
-
-//		double velocity = (maxVelocity / (brakeDistance - stopDistance)) * (distanceToObstacle - stopDistance);
-//
-//		velocity = Math.max(0.0, velocity);
-//		velocity = Math.min(maxVelocity, velocity);
-		
-		// If distance to nearest obstacle is <=
-		// brakeDistance,
-// then the car will start to slow down (in meters)
 		double velocity;
 		
 		if (distanceToObstacle > brakeDistance)

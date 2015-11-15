@@ -2,6 +2,10 @@ package myproject.ui;
 
 import javax.swing.JOptionPane;
 
+/**
+ *  UI with a pop up window. 
+ */
+
 public final class PopupUI implements UI {
 	public void displayMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);

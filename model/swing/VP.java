@@ -7,8 +7,7 @@ package myproject.model.swing;
 class VP {
 	private VP() {}
 	/** Width of model elements, in meters */
-	public static double carLength = 10;
-	static double elementWidth = carLength;
+	static double elementWidth = 10;
 	/** Gap between model elements, in meters */
 	static double gap = 1;
 	/** Width of the displayed graphics window, in pixels */

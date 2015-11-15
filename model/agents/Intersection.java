@@ -2,6 +2,10 @@ package myproject.model.agents;
 
 import myproject.model.Model;
 
+/**
+ * Intersection holds a light and dimensions. Intersections are linked to the appropriate roads
+ * so cars can ask the current road for the light state on its intersection. 
+ */
 public class Intersection implements Agent {
 	private Light light;
 	private double intersectionLength;

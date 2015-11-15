@@ -1,5 +1,9 @@
 package myproject.ui;
 
+/**
+ * Creates either kind of UI depending on which method is called. 
+ */
+
 public class UIFactory {
 	public UIFactory() {
 	}

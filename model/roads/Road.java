@@ -8,7 +8,8 @@ import myproject.model.agents.Car;
 import java.util.ArrayList;
 
 /**
- * A road holds cars.
+ * A road holds cars. A road is also attached to an intersection in order to update cars 
+ * on the state of the light. 
  */
 public class Road {
 	private static final double OUTOFDISTANCE = 10000000;

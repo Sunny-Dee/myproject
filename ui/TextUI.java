@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 
+/**
+ *  Text based UI using the console. 
+ */
+
 public final class TextUI implements UI {
 	final BufferedReader in;
 	final PrintStream out;

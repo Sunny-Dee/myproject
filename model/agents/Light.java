@@ -12,14 +12,10 @@ public class Light implements Agent {
 	private static final int YELLOWSTATE = 1; 
 	
 	public boolean isNull = false;
-	private double greenDurationNS; // Duration of the North/South green phase
-									// (in seconds)
-	private double yellowDurationNS; // Duration of the North/South yellow phase
-										// (in seconds)
-	private double greenDurationEW; // Duration of the East/West green phase (in
-									// seconds)
-	private double yellowDurationEW; // Duration of the East/West yellow phase
-										// (in seconds)
+	private double greenDurationNS;
+	private double yellowDurationNS;
+	private double greenDurationEW; 
+	private double yellowDurationEW; 
 	private java.awt.Color color;
 	private int state;
 	private double duration;

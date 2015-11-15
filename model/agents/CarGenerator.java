@@ -3,6 +3,10 @@ package myproject.model.agents;
 import myproject.model.Model;
 import myproject.model.roads.LongRoad;
 
+/**
+ * Generates cars on the indicated road and based on the entry rate. 
+ */
+
 public class CarGenerator implements Agent {
 	private LongRoad longRoad;
 	private Model model;
@@ -20,7 +24,7 @@ public class CarGenerator implements Agent {
 		this.carLength = carLength;
 		this.brakeDistance = brakeDistance;
 		this.stopDistance = stopDistance;
-		this.entryRate = entryRate*10;
+		this.entryRate = entryRate*100;
 
 	}
 
@@ -29,18 +33,6 @@ public class CarGenerator implements Agent {
 			Car car = new Car(longRoad, model, carVelocity, carLength, brakeDistance, stopDistance);
 			model.addAgent(car);
 		}
-		
-//		Car car = new Car(longRoad, model, carVelocity, carLength, brakeDistance, stopDistance);
-//		model.addAgent(car);
-//
-//		
-//		entryRate--;
-//		if (entryRate == 0){
-//			Car car = new Car(longRoad, model, carVelocity, carLength, brakeDistance, stopDistance);
-//			model.addAgent(car);
-//			entryRate = 2;
-//			model.addAgent(car);
-//		}
 	}
 
 	public boolean isNull() {
