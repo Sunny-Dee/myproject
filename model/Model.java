@@ -45,11 +45,12 @@ public class Model extends Observable {
 		
 	}
 
-	public void run(double duration) {
+	public void run(double duration, double timeStep) {
 		if (disposed)
 			throw new IllegalStateException();
 		for (int i = 0; i < duration; i++) {
-			time++;
+//			time++;
+			time += timeStep;
 			// iterate through a copy because agents may change during
 			// iteration...
 			for (Agent a : agents.toArray(new Agent[0])) {
@@ -120,8 +121,8 @@ public class Model extends Observable {
 
 				}
 //				Car cars = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
-				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.carLen(), t.breakDist(),
-						t.stopDist(), t.entryRate());
+				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.minCarLen(), 
+						t.maxCarLen(), t.breakDist(), t.stopDist(), t.entryRate());
 				
 				agents.add(cars);
 
@@ -140,8 +141,8 @@ public class Model extends Observable {
 
 				}
 //				Car cars = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
-				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.carLen(), t.breakDist(),
-						t.stopDist(), t.entryRate());
+				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.minCarLen(), 
+						t.maxCarLen(), t.breakDist(), t.stopDist(), t.entryRate());
 				
 				agents.add(cars);
 			}
@@ -169,8 +170,8 @@ public class Model extends Observable {
 				}
 //				Car cars = new Car(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
 				
-				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(),
-						t.stopDist(), t.entryRate());
+				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), 
+						t.minCarLen(), t.maxCarLen(), t.breakDist(), t.stopDist(), t.entryRate());
 				agents.add(cars);
 			} else {
 				for (int i = 0; i <= rows; i++) {
@@ -184,7 +185,7 @@ public class Model extends Observable {
 				}
 //				Car cars = new Car(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
 				
-				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(),
+				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.minCarLen(), t.maxCarLen(), t.breakDist(),
 						t.stopDist(), t.entryRate());
 				agents.add(cars);
 			}

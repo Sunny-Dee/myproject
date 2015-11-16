@@ -70,7 +70,7 @@ public class Road {
 			return null;
 	}
 
-	public void setIntersection(Agent newIntersection) {
+	public void setIntersection(Agent newIntersection) {	
 		intersection = newIntersection;
 	}
 

@@ -29,9 +29,9 @@ public class Car implements Agent {
 	private Model model;
 	private Car carAhead;
 
-	public Car(LongRoad longRoad, Model model, double maxVelocity, double carLength, double brakeDistance,
-			double stopDistance) {
-		this.carLength = (int) Math.ceil(Math.random() * carLength);
+	public Car(LongRoad longRoad, Model model, double maxVelocity, double minCarLength, 
+			double maxCarLength, double brakeDistance, double stopDistance) {
+		this.carLength = (int) (Math.ceil(Math.random() * (maxCarLength - minCarLength)) + minCarLength);
 		this.maxVelocity =  (int) Math.ceil(Math.random() * maxVelocity);
 		this.brakeDistance = brakeDistance;
 		this.stopDistance = stopDistance;

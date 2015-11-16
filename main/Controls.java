@@ -1,4 +1,4 @@
-package myproject.main;
+	package myproject.main;
 
 import myproject.model.AnimatorBuilder;
 import myproject.model.TrafficBuilder;
@@ -104,7 +104,7 @@ public class Controls {
 		});
 		s.add("Simulation time step", () -> {
 			UIFormBuilder f = new UIFormBuilder();
-			f.add("Current Simulation time step \nEnter new simulation time step", numberTest);
+			f.add("Enter new simulation time step", numberTest);
 			String[] result1 = ui.processForm(f.toUIForm("Simulation time step"));
 			trafficBuilder.setTimeStep(Integer.parseInt(result1[0]));
 		});
@@ -135,7 +135,7 @@ public class Controls {
 			boolean x;
 			do {
 				UIFormBuilder f = new UIFormBuilder();
-				f.add("Car entry rate (seconds/car) [min = 1.0, max = 2.5]", doubleTest);
+				f.add("Set Car entry rate (seconds/car) [min = 1.0, max = 4.0]", doubleTest);
 				String[] result = ui.processForm(f.toUIForm("Entry rate"));
 				x = trafficBuilder.setEntryRate(Double.parseDouble(result[0]));
 			} while (!x);
@@ -144,7 +144,7 @@ public class Controls {
 			boolean x;
 			do {
 				UIFormBuilder f = new UIFormBuilder();
-				f.add("Road segment length (meters) [min = 10.0, max = 20.0]", doubleTest);
+				f.add("Road segment length (meters) default [min = 100.0, max = 200.0]", doubleTest);
 				String[] result = ui.processForm(f.toUIForm("Road length"));
 				x = trafficBuilder.setRoadSegmentLength(Double.parseDouble(result[0]));
 			} while (!x);
@@ -159,16 +159,18 @@ public class Controls {
 			boolean x;
 			do {
 				UIFormBuilder f = new UIFormBuilder();
-				f.add("Car length (meters) [min = 10.0, max  = 15.0]", doubleTest);
+				f.add("Set minimum car lenth" , doubleTest);
+				f.add("Set maximum car length", doubleTest);
 				String[] result = ui.processForm(f.toUIForm("Car length"));
-				x = trafficBuilder.setCarLength(Double.parseDouble(result[0]));
+				x = trafficBuilder.setCarLength(Double.parseDouble(result[0]), 
+						Double.parseDouble(result[1]));
 			} while (!x);
 		});
 		s.add("Set max car velocity", () -> {
 			boolean x;
 			do {
 				UIFormBuilder f = new UIFormBuilder();
-				f.add("Car maximum velocity (meters/second) [min = 1.0, max = 3.0]  ", doubleTest);
+				f.add("Set car maximum velocity default (meters/second) [min = 1.0, max = 6.0]  ", doubleTest);
 				String[] result = ui.processForm(f.toUIForm("Car velocity"));
 				x = trafficBuilder.setMaxVelocity(Double.parseDouble(result[0]));
 			} while (!x);
@@ -204,7 +206,7 @@ public class Controls {
 			boolean x;
 			do {
 				UIFormBuilder f = new UIFormBuilder();
-				f.add("Traffic light yellow time (seconds) [min = 32.0, max = 40.0]", doubleTest);
+				f.add("Set yellow traffic light time (seconds) [min = 32.0, max = 40.0]", doubleTest);
 				String[] result = ui.processForm(f.toUIForm("Stop distance"));
 				x = trafficBuilder.setGreenLight(Double.parseDouble(result[0]));
 			} while (!x);
@@ -221,19 +223,4 @@ public class Controls {
 
 	}
 
-	// 1. Show current values
-	// 2. Simulation time step
-	// 3. Simulation run time
-	// 4. Grid size
-	// 5. Traffic pattern
-	// 6. Car entry rate
-	// 7. Road segment length
-	// 8. Intersection length
-	// 9. Car length
-	// 10. Car maximum velocity
-	// 11. Car stop distance
-	// 12. Car brake distance
-	// 13. Traffic light green time
-	// 14. Traffic light yellow time
-	// 15. Reset simulation and return to the main menu
 }

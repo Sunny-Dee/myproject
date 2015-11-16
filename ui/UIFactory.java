@@ -7,16 +7,15 @@ package myproject.ui;
 public class UIFactory {
 	public UIFactory() {
 	}
-
-	static private UI popUI = new PopupUI();
-
-	static private UI textUI = new TextUI();
 	
-	static public UI popUI() {
-		return popUI;
+	static public UI createUI(String uiType) {
+		if (uiType == null)
+			return null;
+		else if (uiType.equalsIgnoreCase("popup"))
+			return new PopupUI();
+		else if (uiType.equalsIgnoreCase("text"))
+			return new TextUI();
+		return null;
 	}
 	
-	static public UI textUI() {
-		return textUI;
-	}
 }

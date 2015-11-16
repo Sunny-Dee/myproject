@@ -9,45 +9,21 @@ public class TrafficBuilder {
 	private AnimatorBuilder builder;
 	private Model model;
 
-	// Simulation time step (seconds) [0.1]
-	private double timeStep = 0.1;
 
-	// Simulation run time (seconds) [1000]
+	private double timeStep = 1.0;
 	private double time = 1000;
-
-	// Grid size (number of roads) [row = 2, column 3
 	private int rows = 2;
 	private int columns = 3;
-
-	// Traffic pattern [simple]
 	private int pattern = 2;
-
-	// Car entry rate (seconds/car) [min = 1.0, max = 2.5]
-	private double entryRate = 1.0; // ThreadLocalRandom.current().nextDouble(1.0,
-									// 2.5 + 1) ;
-
-	// Road segment length (meters) [min = 10.0, max = 15.0]
-	private double roadSegmentLength = 20;
-
-	// Intersection length (meters) [min = 10.0, max = 15.0]
+	private double entryRate = 25.0; 
+	private double roadSegmentLength = 200;
 	private double intersectionLength = 10;
-
-	// Car length (meters) [min = 10.0, max = 15.0]
-	private double carLength = 15;
-
-	// Car maximum velocity (meters/second) [min = 1.0, max = 3.0]
-	private double maxVelocity = 3.0;
-
-	// Car stop distance (meters) [min = 0.5, max = 5.0]
+	private double minCarLength = 10;
+	private double maxCarLength = 15;
+	private double maxVelocity = 6.0;
 	private double stopDistance = 1.0;
-
-	// [min = 9.0, max = 10.0]
 	private double breakDistance = 10.0;
-
-	// Traffic light green time (seconds) [min = 30.0, max = 180.0]
 	private double greenLightTime = 50.0;
-
-	// Traffic light yellow time (seconds) [min = 32.0, max = 40.0]
 	private double yellowLightTime = 30.0;
 
 	public TrafficBuilder(AnimatorBuilder builder) {
@@ -105,9 +81,9 @@ public class TrafficBuilder {
 	}
 
 	public boolean setEntryRate(double newEntryRate) {
-		if (newEntryRate < 1.0 || newEntryRate > 2.5)
+		if (newEntryRate < 1.0 || newEntryRate > 4.0)
 			return false;
-		entryRate = newEntryRate;
+		entryRate = newEntryRate * 10;
 		return true;
 	}
 
@@ -116,14 +92,14 @@ public class TrafficBuilder {
 	}
 
 	public boolean setRoadSegmentLength(double newLength) {
-		if (newLength < 10.0 || newLength > 15.0)
+		if (newLength < 100.0 || newLength > 200.0)
 			return false;
 		roadSegmentLength = newLength;
 		return true;
 	}
 
 	public double roadSegmentLen() {
-		return roadSegmentLength * 10;
+		return roadSegmentLength;
 	}
 
 	public boolean setIntersectionLength(double newLength) {
@@ -137,19 +113,26 @@ public class TrafficBuilder {
 		return intersectionLength;
 	}
 
-	public boolean setCarLength(double newCarLength) {
-		if (newCarLength < 10.0 || newCarLength > 15.0)
+	public boolean setCarLength(double newMinCarLength, double newMaxCarLength) {
+		if (newMinCarLength < 0.0 || newMinCarLength > 100.0)
 			return false;
-		carLength = newCarLength;
+		if (newMaxCarLength < 0.0 || newMaxCarLength > 100.0)
+			return false;
+		minCarLength = newMinCarLength;
+		maxCarLength = newMaxCarLength;
 		return true;
 	}
-
-	public double carLen() {
-		return carLength;
+	
+	public double minCarLen() {
+		return minCarLength;
+	}
+	
+	public double maxCarLen() {
+		return maxCarLength;
 	}
 
 	public boolean setMaxVelocity(double newMax) {
-		if (newMax < 10.0 || newMax > 15.0)
+		if (newMax < 1.0 || newMax > 6.0)
 			return false;
 		maxVelocity = newMax;
 		return true;
@@ -205,7 +188,7 @@ public class TrafficBuilder {
 
 	public void runModel() {
 		model = new Model(builder, this);
-		model.run(time);
+		model.run(time, timeStep);
 		model.dispose();
 	}
 
@@ -215,15 +198,15 @@ public class TrafficBuilder {
 		str.append("2. Simulation run time (seconds) [" + time + "] \n");
 		str.append("3. Grid size (number of roads) [rows = " + rows + ", columns " + columns + "\n");
 		str.append("4. Traffic pattern" + patternToString() + "\n");
-		str.append("5. Car entry rate (seconds/car) [min = 1.0, max = 2.5]\n");
-		str.append("6. Road segment length (meters) [min = 10.0, max = 15.0]\n");
-		str.append("7. Intersection length (meters) [min = 10.0, max  = 15.0]\n");
-		str.append("8. Car length (meters) [min = 10.0, max  = 15.0]\n");
-		str.append("9. Car maximum velocity (meters/second) [min = 1.0, max = 3.0]\n");
+		str.append("5. Car entry rate (seconds/car) [min = 1.0, max = 4.0]\n");
+		str.append("6. Road segment length (meters) " + roadSegmentLength +"\n");
+		str.append("7. Intersection length (meters) " + intersectionLength + "\n");
+		str.append("8. Car length (meters) [min = " + minCarLength +", max  = " + maxCarLength +"]\n");
+		str.append("9. Car maximum velocity (meters/second) [min = 1.0, max = " +  maxVelocity + "]\n");
 		str.append("10. Car stop distance (meters) [min = 0.5, max = 5.0]\n");
-		str.append("11. Car break distance (meters) [min = 9.0, max = 10.0]\n");
-		str.append("12. Traffic light green time (seconds) [min = 30.0, max = 180.0]\n");
-		str.append("13. Traffic light yellow time (seconds) [min = 32.0, max = 40.0]\n");
+		str.append("11. Car break distance (meters) " + breakDistance + "\n");
+		str.append("12. Traffic light green time (seconds) " + greenLightTime + "\n");
+		str.append("13. Traffic light yellow time (seconds) " + yellowLightTime + "\n");
 
 		return str.toString();
 	}

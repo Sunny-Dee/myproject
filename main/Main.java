@@ -13,12 +13,10 @@ public class Main {
 		AnimatorBuilder builder = null;
 
 		if (Math.random() <= 0.9) {
-//			ui = new myproject.ui.PopupUI();
-			ui = UIFactory.popUI();
+			ui = UIFactory.createUI("popup");
 			builder = new SwingAnimatorBuilder();	
 		} else {
-//			ui = new myproject.ui.TextUI();
-			ui = UIFactory.textUI();
+			ui = UIFactory.createUI("text");
 			builder = new TextAnimatorBuilder();
 		}
 	
