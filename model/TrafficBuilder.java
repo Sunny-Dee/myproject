@@ -193,9 +193,9 @@ public class TrafficBuilder {
 		StringBuilder str = new StringBuilder("");
 		str.append("1. Simulation time step (seconds) [" + timeStep + "] \n");
 		str.append("2. Simulation run time (seconds) [" + time + "] \n");
-		str.append("3. Grid size (number of roads) [rows = " + rows + ", columns " + columns + "\n");
+		str.append("3. Grid size (number of roads) [rows = " + rows + ", columns= " + columns + "]\n");
 		str.append("4. Traffic pattern " + patternToString() + "\n");
-		str.append("5. Car entry rate (seconds/car) " + entryRate + "\n");
+		str.append("5. Car entry rate (seconds/car) " + entryRate/10 + "\n");
 		str.append("6. Road segment length (meters) " + roadSegmentLength + "\n");
 		str.append("7. Intersection length (meters) " + intersectionLength + "\n");
 		str.append("8. Car length (meters) [min = " + minCarLength + ", max  = " + maxCarLength + "]\n");
