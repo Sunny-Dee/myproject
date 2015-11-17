@@ -1,21 +1,20 @@
 package myproject.model;
 
 /**
- * Class to hold default values and allow users change the parameters. 
- * It runs a new model with the indicated parameters. 
+ * Class to hold default values and allow users change the parameters. It runs a
+ * new model with the indicated parameters.
  */
 
 public class TrafficBuilder {
 	private AnimatorBuilder builder;
 	private Model model;
 
-
 	private double timeStep = 1.0;
 	private double time = 1000;
 	private int rows = 2;
 	private int columns = 3;
 	private int pattern = 2;
-	private double entryRate = 25.0; 
+	private double entryRate = 25.0;
 	private double roadSegmentLength = 200;
 	private double intersectionLength = 10;
 	private double minCarLength = 10;
@@ -28,7 +27,6 @@ public class TrafficBuilder {
 
 	public TrafficBuilder(AnimatorBuilder builder) {
 		this.builder = builder;
-		
 	};
 
 	public void setTimeStep(double newtime) {
@@ -63,10 +61,9 @@ public class TrafficBuilder {
 	public boolean setPattern(int patternChoice) { // consider design for this
 													// one
 		if (patternChoice < 1 || patternChoice > 2)
-			// throw new IllegalArgumentException();
 			return false;
 		pattern = patternChoice;
-		return true; // if setPattern == false, ask again.
+		return true; 
 	}
 
 	public String patternToString() {
@@ -114,19 +111,19 @@ public class TrafficBuilder {
 	}
 
 	public boolean setCarLength(double newMinCarLength, double newMaxCarLength) {
-		if (newMinCarLength < 0.0 || newMinCarLength > 100.0)
+		if (newMinCarLength < 1.0 || newMinCarLength > 30.0)
 			return false;
-		if (newMaxCarLength < 0.0 || newMaxCarLength > 100.0)
+		if (newMaxCarLength < 1.0 || newMaxCarLength > 30.0)
 			return false;
 		minCarLength = newMinCarLength;
 		maxCarLength = newMaxCarLength;
 		return true;
 	}
-	
+
 	public double minCarLen() {
 		return minCarLength;
 	}
-	
+
 	public double maxCarLen() {
 		return maxCarLength;
 	}
@@ -154,7 +151,7 @@ public class TrafficBuilder {
 	}
 
 	public boolean setBreakDistance(double newBreakDist) {
-		if (newBreakDist < 9.0 || newBreakDist > 10.0)
+		if (newBreakDist < 8.0 || newBreakDist > 10.0)
 			return false;
 		breakDistance = newBreakDist;
 		return true;
@@ -184,7 +181,7 @@ public class TrafficBuilder {
 
 	public double yellowLightTime() {
 		return yellowLightTime;
-	}
+	}	
 
 	public void runModel() {
 		model = new Model(builder, this);
@@ -197,13 +194,13 @@ public class TrafficBuilder {
 		str.append("1. Simulation time step (seconds) [" + timeStep + "] \n");
 		str.append("2. Simulation run time (seconds) [" + time + "] \n");
 		str.append("3. Grid size (number of roads) [rows = " + rows + ", columns " + columns + "\n");
-		str.append("4. Traffic pattern" + patternToString() + "\n");
-		str.append("5. Car entry rate (seconds/car) [min = 1.0, max = 4.0]\n");
-		str.append("6. Road segment length (meters) " + roadSegmentLength +"\n");
+		str.append("4. Traffic pattern " + patternToString() + "\n");
+		str.append("5. Car entry rate (seconds/car) " + entryRate + "\n");
+		str.append("6. Road segment length (meters) " + roadSegmentLength + "\n");
 		str.append("7. Intersection length (meters) " + intersectionLength + "\n");
-		str.append("8. Car length (meters) [min = " + minCarLength +", max  = " + maxCarLength +"]\n");
-		str.append("9. Car maximum velocity (meters/second) [min = 1.0, max = " +  maxVelocity + "]\n");
-		str.append("10. Car stop distance (meters) [min = 0.5, max = 5.0]\n");
+		str.append("8. Car length (meters) [min = " + minCarLength + ", max  = " + maxCarLength + "]\n");
+		str.append("9. Car maximum velocity (meters/second) [min = 1.0, max = " + maxVelocity + "]\n");
+		str.append("10. Car stop distance (meters) " + stopDistance + "\n");
 		str.append("11. Car break distance (meters) " + breakDistance + "\n");
 		str.append("12. Traffic light green time (seconds) " + greenLightTime + "\n");
 		str.append("13. Traffic light yellow time (seconds) " + yellowLightTime + "\n");

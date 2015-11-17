@@ -3,19 +3,20 @@ package myproject.model.agents;
 import java.awt.Color;
 
 /**
- * A light is held within an intersection and changes its state based on the time it's been running.
- * The interpretation of each state is left to the objects observing it. 
- * Users can change the duration on the lights when creating it. 
+ * A light is held within an intersection and changes its state based on the
+ * time it's been running. The interpretation of each state is left to the
+ * objects observing it. Users can change the duration on the lights when
+ * creating it.
  */
 public class Light implements Agent {
-	private static final int GREENSTATE = 0; 
-	private static final int YELLOWSTATE = 1; 
-	
+	private static final int GREENSTATE = 0;
+	private static final int YELLOWSTATE = 1;
+
 	public boolean isNull = false;
 	private double greenDurationNS;
 	private double yellowDurationNS;
-	private double greenDurationEW; 
-	private double yellowDurationEW; 
+	private double greenDurationEW;
+	private double yellowDurationEW;
 	private java.awt.Color color;
 	private int state;
 	private double duration;
@@ -30,7 +31,7 @@ public class Light implements Agent {
 		yellowDurationEW = 30.0;
 
 		setColor();
-	} 
+	}
 
 	public int getState() {
 		return state;
@@ -67,7 +68,6 @@ public class Light implements Agent {
 
 	}
 
-	// Temporarily hard coding this but will change it later.
 	public double getDimension() {
 		return dimension;
 	}

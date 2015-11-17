@@ -1,4 +1,4 @@
-	package myproject.main;
+package myproject.main;
 
 import myproject.model.AnimatorBuilder;
 import myproject.model.TrafficBuilder;
@@ -104,13 +104,13 @@ public class Controls {
 		});
 		s.add("Simulation time step", () -> {
 			UIFormBuilder f = new UIFormBuilder();
-			f.add("Enter new simulation time step", numberTest);
+			f.add("Enter new simulation time step, default is 1.0", numberTest);
 			String[] result1 = ui.processForm(f.toUIForm("Simulation time step"));
 			trafficBuilder.setTimeStep(Integer.parseInt(result1[0]));
 		});
 		s.add("Simulation runtime", () -> {
 			UIFormBuilder f = new UIFormBuilder();
-			f.add("Enter new simulation runtime", numberTest);
+			f.add("Enter new simulation runtime, default is 1000", numberTest);
 			String[] result = ui.processForm(f.toUIForm("Simulation runtime"));
 			trafficBuilder.settime(Integer.parseInt(result[0]));
 		});
@@ -151,7 +151,7 @@ public class Controls {
 		});
 		s.add("Set intersection lengths", () -> {
 			UIFormBuilder f = new UIFormBuilder();
-			f.add("Intersection length (meters) [min = 10.0, max  = 15.0]", doubleTest);
+			f.add("Intersection length (meters) [min = 10.0, max  = 20.0]", doubleTest);
 			String[] result = ui.processForm(f.toUIForm("Intersection length"));
 			trafficBuilder.setIntersectionLength(Double.parseDouble(result[0]));
 		});
@@ -159,11 +159,10 @@ public class Controls {
 			boolean x;
 			do {
 				UIFormBuilder f = new UIFormBuilder();
-				f.add("Set minimum car lenth" , doubleTest);
+				f.add("Set minimum car lenth", doubleTest);
 				f.add("Set maximum car length", doubleTest);
 				String[] result = ui.processForm(f.toUIForm("Car length"));
-				x = trafficBuilder.setCarLength(Double.parseDouble(result[0]), 
-						Double.parseDouble(result[1]));
+				x = trafficBuilder.setCarLength(Double.parseDouble(result[0]), Double.parseDouble(result[1]));
 			} while (!x);
 		});
 		s.add("Set max car velocity", () -> {
@@ -188,7 +187,7 @@ public class Controls {
 			boolean x;
 			do {
 				UIFormBuilder f = new UIFormBuilder();
-				f.add("Car break distance (meters) [min = 9.0, max = 10.0]", doubleTest);
+				f.add("Car break distance (meters) [min = 8.0, max = 10.0]", doubleTest);
 				String[] result = ui.processForm(f.toUIForm("Stop distance"));
 				x = trafficBuilder.setBreakDistance(Double.parseDouble(result[0]));
 			} while (!x);

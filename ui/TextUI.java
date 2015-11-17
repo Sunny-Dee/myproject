@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 /**
- *  Text based UI using the console. 
+ * Text based UI using the console.
  */
 
 public final class TextUI implements UI {

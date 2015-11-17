@@ -3,8 +3,9 @@ package myproject.model.agents;
 import myproject.model.Model;
 
 /**
- * Intersection holds a light and dimensions. Intersections are linked to the appropriate roads
- * so cars can ask the current road for the light state on its intersection. 
+ * Intersection holds a light and dimensions. Intersections are linked to the
+ * appropriate roads so cars can ask the current road for the light state on its
+ * intersection.
  */
 public class Intersection implements Agent {
 	private Light light;
@@ -14,7 +15,8 @@ public class Intersection implements Agent {
 	public Intersection(Model model, Light light, double intersectionLength) {
 		this.model = model;
 		this.light = light;
-		this.intersectionLength = intersectionLength; // Hard coding this for now, change it later
+		this.intersectionLength = intersectionLength; // Hard coding this for
+														// now, change it later
 	}
 
 	public java.awt.Color getColor() {
@@ -32,8 +34,8 @@ public class Intersection implements Agent {
 	public double getDimension() {
 		return intersectionLength;
 	}
-	
-	public double getRoadLength(){
+
+	public double getRoadLength() {
 		return model.roadLen();
 	}
 

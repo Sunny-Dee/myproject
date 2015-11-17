@@ -15,7 +15,6 @@ public class MyMain2 {
 			tb.runModel();
 		}
 
-
 		{
 
 			TrafficBuilder tb = new TrafficBuilder(new SwingAnimatorBuilder());

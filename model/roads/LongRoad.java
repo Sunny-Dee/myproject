@@ -28,8 +28,8 @@ public class LongRoad {
 		return roads.size();
 	}
 
-	public boolean oppositeDirection(){
+	public boolean oppositeDirection() {
 		return oppositeDirection;
 	}
-		
+
 }

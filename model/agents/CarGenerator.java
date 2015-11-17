@@ -4,7 +4,7 @@ import myproject.model.Model;
 import myproject.model.roads.LongRoad;
 
 /**
- * Generates cars on the indicated road and based on the entry rate. 
+ * Generates cars on the indicated road and based on the entry rate.
  */
 
 public class CarGenerator implements Agent {
@@ -17,7 +17,7 @@ public class CarGenerator implements Agent {
 	private double brakeDistance;
 	private double entryRate;
 
-	public CarGenerator(LongRoad longRoad, Model model, double carVelocity, double minCarLength, double maxCarLength, 
+	public CarGenerator(LongRoad longRoad, Model model, double carVelocity, double minCarLength, double maxCarLength,
 			double brakeDistance, double stopDistance, double entryRate) {
 		this.longRoad = longRoad;
 		this.model = model;
@@ -29,11 +29,19 @@ public class CarGenerator implements Agent {
 		this.entryRate = entryRate;
 
 	}
+	
+	public boolean hasSpace(){
+		double roadLength = longRoad.nextRoad(0).getRoadLength();
+		double totalCarLengths = 0;
+		for (Car car : longRoad.nextRoad(0).getCars())
+			totalCarLengths += car.carLength;
+		
+		return roadLength > totalCarLengths;
+	}
 
 	public void run(double time) {
-		if ((time%entryRate) == 0) {
-			Car car = new Car(longRoad, model, carVelocity, minCarLength, 
-								maxCarLength, brakeDistance, stopDistance);
+		if ((time % entryRate) == 0) {
+			Car car = new Car(longRoad, model, carVelocity, minCarLength, maxCarLength, brakeDistance, stopDistance);
 			model.addAgent(car);
 		}
 	}

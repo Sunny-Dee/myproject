@@ -20,7 +20,7 @@ public class Model extends Observable {
 	private List<Agent> agents;
 	private Animator animator;
 	private boolean disposed;
-	private double time; //time step
+	private double time; // time step
 	private TrafficBuilder t;
 	private int rows;
 	private int columns;
@@ -42,14 +42,14 @@ public class Model extends Observable {
 		this.animator = builder.getAnimator();
 		super.addObserver(animator);
 		simple = t.pattern();
-		
+
 	}
 
 	public void run(double duration, double timeStep) {
 		if (disposed)
 			throw new IllegalStateException();
 		for (int i = 0; i < duration; i++) {
-//			time++;
+			// time++;
 			time += timeStep;
 			// iterate through a copy because agents may change during
 			// iteration...
@@ -68,7 +68,7 @@ public class Model extends Observable {
 		animator.dispose();
 		disposed = true;
 	}
-	
+
 	public void addAgent(Agent a) {
 		agents.add(a);
 	}
@@ -88,8 +88,8 @@ public class Model extends Observable {
 		for (int i = 0; i <= rows; i++) {
 			for (int j = 0; j <= columns; j++) {
 
-				intersections[i][j] = new Intersection(this, new Light((int) (Math.random() * 10) % 3, t.intersectionLen(),
-						t.greenLightTime(), t.yellowLightTime()), t.intersectionLen());
+				intersections[i][j] = new Intersection(this, new Light((int) (Math.random() * 10) % 3,
+						t.intersectionLen(), t.greenLightTime(), t.yellowLightTime()), t.intersectionLen());
 			}
 		}
 
@@ -108,22 +108,21 @@ public class Model extends Observable {
 				for (int j = columns; j >= 0; j--) {
 					Road l = new Road(t.roadSegmentLen(), true);
 
-					
 					if (j == 0) {
 						l.setIntersection(new NullIntersection());
 					} else {
-						l.setIntersection(intersections[i][j-1]);
+						l.setIntersection(intersections[i][j - 1]);
 					}
-
 
 					builder.addHorizontalRoad(l, i, j, eastToWest);
 					temproad.addRoad(l);
 
 				}
-//				Car cars = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
-				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.minCarLen(), 
-						t.maxCarLen(), t.breakDist(), t.stopDist(), t.entryRate());
-				
+				// Car cars = new Car(temproad, this, t.maxVel(), t.carLen(),
+				// t.breakDist(), t.stopDist());
+				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.minCarLen(), t.maxCarLen(),
+						t.breakDist(), t.stopDist(), t.entryRate());
+
 				agents.add(cars);
 
 			}
@@ -140,10 +139,11 @@ public class Model extends Observable {
 					temproad.addRoad(l);
 
 				}
-//				Car cars = new Car(temproad, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
-				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.minCarLen(), 
-						t.maxCarLen(), t.breakDist(), t.stopDist(), t.entryRate());
-				
+				// Car cars = new Car(temproad, this, t.maxVel(), t.carLen(),
+				// t.breakDist(), t.stopDist());
+				CarGenerator cars = new CarGenerator(temproad, this, t.maxVel(), t.minCarLen(), t.maxCarLen(),
+						t.breakDist(), t.stopDist(), t.entryRate());
+
 				agents.add(cars);
 			}
 			if (!simple) {
@@ -158,20 +158,21 @@ public class Model extends Observable {
 			if (southToNorth) {
 				for (int i = rows; i >= 0; i--) {
 					Road l = new Road(t.roadSegmentLen(), false);
-					
+
 					if (i == 0) {
 						l.setIntersection(new NullIntersection());
 					} else {
-						l.setIntersection(intersections[i-1][j]);
+						l.setIntersection(intersections[i - 1][j]);
 					}
 
 					builder.addVerticalRoad(l, i, j, southToNorth);
 					temproad2.addRoad(l);
 				}
-//				Car cars = new Car(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
-				
-				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), 
-						t.minCarLen(), t.maxCarLen(), t.breakDist(), t.stopDist(), t.entryRate());
+				// Car cars = new Car(temproad2, this, t.maxVel(), t.carLen(),
+				// t.breakDist(), t.stopDist());
+
+				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.minCarLen(), t.maxCarLen(),
+						t.breakDist(), t.stopDist(), t.entryRate());
 				agents.add(cars);
 			} else {
 				for (int i = 0; i <= rows; i++) {
@@ -183,20 +184,21 @@ public class Model extends Observable {
 					builder.addVerticalRoad(l, i, j, southToNorth);
 					temproad2.addRoad(l);
 				}
-//				Car cars = new Car(temproad2, this, t.maxVel(), t.carLen(), t.breakDist(), t.stopDist());
-				
-				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.minCarLen(), t.maxCarLen(), t.breakDist(),
-						t.stopDist(), t.entryRate());
+				// Car cars = new Car(temproad2, this, t.maxVel(), t.carLen(),
+				// t.breakDist(), t.stopDist());
+
+				CarGenerator cars = new CarGenerator(temproad2, this, t.maxVel(), t.minCarLen(), t.maxCarLen(),
+						t.breakDist(), t.stopDist(), t.entryRate());
 				agents.add(cars);
 			}
 			if (!simple) {
 				southToNorth = !southToNorth;
 			}
 		}
-		
+
 	}
-	
-	public double roadLen ( ){
+
+	public double roadLen() {
 		return t.roadSegmentLen();
 	}
 

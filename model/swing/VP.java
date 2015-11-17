@@ -1,11 +1,12 @@
 package myproject.model.swing;
 
-
 /**
  * Static class for visualization parameters.
  */
 class VP {
-	private VP() {}
+	private VP() {
+	}
+
 	/** Width of model elements, in meters */
 	static double elementWidth = 10;
 	/** Gap between model elements, in meters */

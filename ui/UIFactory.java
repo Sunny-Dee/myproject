@@ -1,13 +1,13 @@
 package myproject.ui;
 
 /**
- * Creates either kind of UI depending on which method is called. 
+ * Creates either kind of UI depending on which method is called.
  */
 
 public class UIFactory {
 	public UIFactory() {
 	}
-	
+
 	static public UI createUI(String uiType) {
 		if (uiType == null)
 			return null;
@@ -17,5 +17,5 @@ public class UIFactory {
 			return new TextUI();
 		return null;
 	}
-	
+
 }

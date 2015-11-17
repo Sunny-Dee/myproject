@@ -14,12 +14,12 @@ public class Main {
 
 		if (Math.random() <= 0.9) {
 			ui = UIFactory.createUI("popup");
-			builder = new SwingAnimatorBuilder();	
+			builder = new SwingAnimatorBuilder();
 		} else {
 			ui = UIFactory.createUI("text");
 			builder = new TextAnimatorBuilder();
 		}
-	
+
 		Controls control = new Controls(builder, ui);
 		control.run();
 	}

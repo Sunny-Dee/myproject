@@ -15,29 +15,35 @@ import myproject.util.Animator;
  */
 public class TextAnimatorBuilder implements AnimatorBuilder {
 	TextAnimator animator;
+
 	public TextAnimatorBuilder() {
 		this.animator = new TextAnimator();
-	}	
+	}
+
 	public Animator getAnimator() {
-		if (animator == null) { throw new IllegalStateException(); }
+		if (animator == null) {
+			throw new IllegalStateException();
+		}
 		Animator returnValue = animator;
 		animator = null;
 		return returnValue;
 	}
+
 	public void addLight(Agent d, int i, int j) {
-		animator.addLight(d,i,j);
-	}
-	public void addHorizontalRoad(Road l, int i, int j, boolean eastToWest) {
-		animator.addRoad(l,i,j);
-	}
-	public void addVerticalRoad(Road l, int i, int j, boolean southToNorth) {
-		animator.addRoad(l,i,j);
-	}
-	
-	public void clear(){
-		animator = new TextAnimator();
+		animator.addLight(d, i, j);
 	}
 
+	public void addHorizontalRoad(Road l, int i, int j, boolean eastToWest) {
+		animator.addRoad(l, i, j);
+	}
+
+	public void addVerticalRoad(Road l, int i, int j, boolean southToNorth) {
+		animator.addRoad(l, i, j);
+	}
+
+	public void clear() {
+		animator = new TextAnimator();
+	}
 
 	/** Class for drawing the Model. */
 	private static class TextAnimator implements Animator {
@@ -47,6 +53,7 @@ public class TextAnimatorBuilder implements AnimatorBuilder {
 			T x;
 			int i;
 			int j;
+
 			Element(T x, int i, int j) {
 				this.x = x;
 				this.i = i;
@@ -56,18 +63,22 @@ public class TextAnimatorBuilder implements AnimatorBuilder {
 
 		private List<Element<Road>> roadElements;
 		private List<Element<Agent>> lightElements;
+
 		TextAnimator() {
 			roadElements = new ArrayList<Element<Road>>();
 			lightElements = new ArrayList<Element<Agent>>();
 		}
+
 		void addLight(Agent x, int i, int j) {
-			lightElements.add(new Element<Agent>(x,i,j));
-		}
-		void addRoad(Road x, int i, int j) {
-			roadElements.add(new Element<Road>(x,i,j));
+			lightElements.add(new Element<Agent>(x, i, j));
 		}
 
-		public void dispose() { }
+		void addRoad(Road x, int i, int j) {
+			roadElements.add(new Element<Road>(x, i, j));
+		}
+
+		public void dispose() {
+		}
 
 		public void update(Observable o, Object arg) {
 			for (Element<Agent> e : lightElements) {

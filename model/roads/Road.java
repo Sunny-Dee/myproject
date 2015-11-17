@@ -8,8 +8,8 @@ import myproject.model.agents.Car;
 import java.util.ArrayList;
 
 /**
- * A road holds cars. A road is also attached to an intersection in order to update cars 
- * on the state of the light. 
+ * A road holds cars. A road is also attached to an intersection in order to
+ * update cars on the state of the light.
  */
 public class Road {
 	private static final double OUTOFDISTANCE = 10000000;
@@ -49,20 +49,20 @@ public class Road {
 	public List<Car> getCars() {
 		return cars;
 	}
-	
-	public Car getCar(int index){
+
+	public Car getCar(int index) {
 		return cars.get(index);
 	}
-	
-//	public double carInFront(Car car){
-//		int index = cars.indexOf(car) - 1;
-//		if (index >= 0)
-//			return cars.get(index).getPosition();
-//		else
-//			return OUTOFDISTANCE;   
-//	}
-	
-	public Car carInFront(Car car){
+
+	// public double carInFront(Car car){
+	// int index = cars.indexOf(car) - 1;
+	// if (index >= 0)
+	// return cars.get(index).getPosition();
+	// else
+	// return OUTOFDISTANCE;
+	// }
+
+	public Car carInFront(Car car) {
 		int index = cars.indexOf(car) - 1;
 		if (index >= 0)
 			return cars.get(index);
@@ -70,7 +70,7 @@ public class Road {
 			return null;
 	}
 
-	public void setIntersection(Agent newIntersection) {	
+	public void setIntersection(Agent newIntersection) {
 		intersection = newIntersection;
 	}
 
@@ -87,7 +87,7 @@ public class Road {
 		}
 		if (horizontal) {
 			return s <= 1;
-		} else 
+		} else
 			return s > 1;
 
 	}

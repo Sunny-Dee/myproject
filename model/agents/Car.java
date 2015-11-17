@@ -6,7 +6,7 @@ import myproject.model.roads.Road;
 
 /**
  * A car remembers its position from the beginning of its road. Cars have random
- * velocity and random length within the indicated range. 
+ * velocity and random length within the indicated range.
  */
 public class Car implements Agent {
 
@@ -16,11 +16,11 @@ public class Car implements Agent {
 	private static final double OUTOFDISTANCE = 10000000;
 	private java.awt.Color color = new java.awt.Color((int) Math.ceil(Math.random() * 255),
 			(int) Math.ceil(Math.random() * 255), (int) Math.ceil(Math.random() * 255));
-	private double maxVelocity; 
+	private double maxVelocity;
 	private double distanceToObstacle;
-	private double brakeDistance; 
-	private double stopDistance; 
-	private int length; 
+	private double brakeDistance;
+	private double stopDistance;
+	private int length;
 
 	private Road currentRoad;
 	private LongRoad longRoad;
@@ -29,10 +29,10 @@ public class Car implements Agent {
 	private Model model;
 	private Car carAhead;
 
-	public Car(LongRoad longRoad, Model model, double maxVelocity, double minCarLength, 
-			double maxCarLength, double brakeDistance, double stopDistance) {
+	public Car(LongRoad longRoad, Model model, double maxVelocity, double minCarLength, double maxCarLength,
+			double brakeDistance, double stopDistance) {
 		this.carLength = (int) (Math.ceil(Math.random() * (maxCarLength - minCarLength)) + minCarLength);
-		this.maxVelocity =  (int) Math.ceil(Math.random() * maxVelocity);
+		this.maxVelocity = (int) Math.ceil(Math.random() * maxVelocity);
 		this.brakeDistance = brakeDistance;
 		this.stopDistance = stopDistance;
 		this.model = model;
@@ -61,23 +61,23 @@ public class Car implements Agent {
 
 	public void nextRoad() {
 
-//		currentRoad.sinkCar(this);
+		// currentRoad.sinkCar(this);
 		currentRoad = longRoad.nextRoad(Math.min(index++, longRoad.getRoadNum() - 1));
-//		currentRoad.accept(this);
+		// currentRoad.accept(this);
 		segmentPosition = 0;
 	}
-	
-	public double distanceToObstacle(){
+
+	public double distanceToObstacle() {
 		double carToCar;
 		if (carAhead == null)
 			carToCar = OUTOFDISTANCE;
 		else
 			carToCar = carAhead.getPosition() - position - carLength;
-		
+
 		double carToIntersection = currentRoad.getRoadLength() - segmentPosition - carLength;
-		
+
 		return Math.min(carToIntersection, carToCar);
-		
+
 	}
 
 	public java.awt.Color getColor() {
@@ -91,15 +91,16 @@ public class Car implements Agent {
 	private double update() {
 		distanceToObstacle = distanceToObstacle();
 		double velocity;
-		
+
 		if (distanceToObstacle > brakeDistance)
 			velocity = maxVelocity;
 		else {
-			if(distanceToObstacle <= stopDistance)
+			if (distanceToObstacle <= stopDistance)
 				velocity = 0;
 			else
-				velocity = 1;
-		}		
+				velocity = distanceToObstacle/brakeDistance;
+//				velocity = 1;
+		}
 
 		return velocity;
 	}
@@ -119,13 +120,13 @@ public class Car implements Agent {
 				position += 100000;
 				model.removeAgent(this);
 				sunk = true;
-			} 
-			
-			if (currentRoad.canGo()) { 
+			}
+
+			if (currentRoad.canGo()) {
 				position += currentRoad.intersection.getDimension() + carLength;
 				nextRoad();
 
-			}  else {
+			} else {
 				segmentPosition += 0;
 				position += 0;
 
